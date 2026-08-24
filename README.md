@@ -35,3 +35,11 @@ Importare il repository in Vercel come progetto statico. Nessun build command ri
 - Monumenti Promo Città più visibili e raffinati
 - Promo Parigi senza 'Silhouette'
 - Contatti: visualizzazione 'Ciccio Pubblicità' (dati fiscali nel footer invariati)
+
+
+## V1.4
+- Monumenti Promo Città ridisegnati come silhouette dettagliate e con colore specifico per città
+- Allineamento rigoroso delle 4 card 'Personalizziamo le tue idee'
+- Sfondo grafico e animazioni nella sezione oltre 20 anni
+- Animazione su Qualità, Precisione, Creatività, Rapidità
+- Allineamento e maggiore visibilità delle card illustrate del Chi siamo

@@ -381,3 +381,78 @@ button{font:inherit}
  .hero-product-main,.hero-product-small,.hero-product-round,.product-card{animation:none!important}
  .service-card,.stat,.about-feature-card,.city-card{transition:none!important}
 }
+
+/* ===== V1.4 ===== */
+
+/* Exact alignment of the four home service cards */
+.cards-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:stretch}
+.cards-grid .service-card{
+ display:grid!important;grid-template-rows:1fr auto 7.4em auto!important;
+ min-height:360px!important;height:100%!important
+}
+.cards-grid .service-card h3{min-height:0!important;margin:0 0 12px!important;align-self:end}
+.cards-grid .service-card p{min-height:0!important;margin:0!important;align-self:start}
+.cards-grid .service-card a{align-self:end;margin-top:18px!important}
+
+/* Experience section: graphic backdrop + animated four cards */
+.experience{position:relative;overflow:hidden}
+.experience::before{
+ content:"";position:absolute;right:-70px;top:50%;width:430px;height:430px;transform:translateY(-50%);
+ background:url('/assets/images/service-ricamo.svg') center/contain no-repeat;opacity:.035;pointer-events:none
+}
+.experience-grid{position:relative;z-index:1}
+.stat{overflow:hidden}
+.stat::before{transition:transform .45s ease,opacity .45s ease!important;opacity:.22!important}
+.stat:hover::before{transform:scale(1.14) rotate(-4deg);opacity:.31!important}
+.stat strong,.stat span{position:relative;z-index:2}
+
+/* About: exact alignment and stronger icon visibility */
+.grid-3 .about-feature-card{
+ display:grid!important;grid-template-rows:1fr auto 6.5em!important;
+ min-height:280px!important;height:100%!important
+}
+.grid-3 .about-feature-card h3{min-height:0!important;margin:0 0 12px!important;align-self:end}
+.grid-3 .about-feature-card p{min-height:0!important;margin:0!important;align-self:start}
+.about-feature-card::before{opacity:.20!important;transition:transform .4s ease,opacity .4s ease}
+.about-feature-card:hover::before{transform:scale(1.1) rotate(-2deg);opacity:.28!important}
+
+/* Premium city landmarks and individual palette */
+.city-card[data-city="roma"]::before,.promo-card[data-city="roma"]::before{background-image:url('/assets/images/roma-v14.svg')!important}
+.city-card[data-city="parigi"]::before,.promo-card[data-city="parigi"]::before{background-image:url('/assets/images/parigi-v14.svg')!important}
+.city-card[data-city="berlino"]::before,.promo-card[data-city="berlino"]::before{background-image:url('/assets/images/berlino-v14.svg')!important}
+.city-card[data-city="madrid"]::before,.promo-card[data-city="madrid"]::before{background-image:url('/assets/images/madrid-v14.svg')!important}
+.city-card[data-city="vienna"]::before,.promo-card[data-city="vienna"]::before{background-image:url('/assets/images/vienna-v14.svg')!important}
+.city-card[data-city="londra"]::before,.promo-card[data-city="londra"]::before{background-image:url('/assets/images/londra-v14.svg')!important}
+.city-card[data-city="lisbona"]::before,.promo-card[data-city="lisbona"]::before{background-image:url('/assets/images/lisbona-v14.svg')!important}
+.city-card[data-city="praga"]::before,.promo-card[data-city="praga"]::before{background-image:url('/assets/images/praga-v14.svg')!important}
+.city-card[data-city="napoli"]::before,.promo-card[data-city="napoli"]::before{background-image:url('/assets/images/napoli-v14.svg')!important}
+
+.city-card::before{
+ opacity:.72!important;background-size:88%!important;background-position:center 20%!important;
+ transition:transform .45s ease,opacity .45s ease
+}
+.city-card:hover::before{transform:scale(1.08) translateY(-5px);opacity:.88!important}
+.city-card::after{background:linear-gradient(to top,rgba(17,17,17,.96) 0%,rgba(17,17,17,.67) 39%,rgba(17,17,17,.08) 78%)!important}
+.promo-card::before{
+ opacity:.30!important;background-size:74%!important;background-position:92% 75%!important;
+ transition:transform .45s ease,opacity .45s ease
+}
+.promo-card:hover::before{transform:scale(1.07) translateX(-4px);opacity:.40!important}
+
+/* individual subtle card tints */
+.promo-card[data-city="roma"]{background:linear-gradient(145deg,#fff,#fff6f2)}
+.promo-card[data-city="parigi"]{background:linear-gradient(145deg,#fff,#f3f7fc)}
+.promo-card[data-city="berlino"]{background:linear-gradient(145deg,#fff,#fcf2f4)}
+.promo-card[data-city="madrid"]{background:linear-gradient(145deg,#fff,#fff4f1)}
+.promo-card[data-city="vienna"]{background:linear-gradient(145deg,#fff,#fff9e9)}
+.promo-card[data-city="londra"]{background:linear-gradient(145deg,#fff,#eff9fa)}
+.promo-card[data-city="lisbona"]{background:linear-gradient(145deg,#fff,#effafa)}
+.promo-card[data-city="praga"]{background:linear-gradient(145deg,#fff,#faf1f5)}
+.promo-card[data-city="napoli"]{background:linear-gradient(145deg,#fff,#eef9ff)}
+
+@media(max-width:1050px){.cards-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){
+ .cards-grid{grid-template-columns:1fr}
+ .cards-grid .service-card{grid-template-rows:180px auto auto auto!important}
+ .grid-3 .about-feature-card{grid-template-rows:150px auto auto!important}
+}
