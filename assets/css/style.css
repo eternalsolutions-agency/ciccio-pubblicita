@@ -73,7 +73,7 @@ a {
 }
 
 .nav-container {
-  min-height: 88px;
+  min-height: 125px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,24 +82,15 @@ a {
 
 .brand {
   display: flex;
-  flex-direction: column;
-  line-height: 1.05;
+  align-items: center;
+  flex-shrink: 0;
 }
 
-.brand-name {
-  font-size: 1.3rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.5px;
-}
-
-.brand-subtitle {
-  color: var(--green);
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 5px;
+.brand-logo {
+  display: block;
+  width: 115px;
+  height: 115px;
+  object-fit: contain;
 }
 
 .navigation {
@@ -623,6 +614,15 @@ a {
 
 @media (max-width: 1000px) {
 
+  .brand-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .nav-container {
+    min-height: 110px;
+  }
+
   .navigation {
     gap: 16px;
   }
@@ -642,8 +642,14 @@ a {
 @media (max-width: 800px) {
 
   .nav-container {
+    min-height: auto;
     flex-wrap: wrap;
-    padding: 18px 0;
+    padding: 12px 0;
+  }
+
+  .brand-logo {
+    width: 90px;
+    height: 90px;
   }
 
   .navigation {
@@ -679,6 +685,15 @@ a {
 
 
 @media (max-width: 600px) {
+
+  .brand-logo {
+    width: 82px;
+    height: 82px;
+  }
+
+  .languages {
+    margin-left: auto;
+  }
 
   .cards-grid,
   .audience-grid,
