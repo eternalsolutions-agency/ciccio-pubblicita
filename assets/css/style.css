@@ -1,1 +1,732 @@
+/* =========================================================
+   CICCIO PUBBLICITÀ
+   Main stylesheet
+   ========================================================= */
 
+:root {
+  --black: #111111;
+  --dark: #1b1b1b;
+  --dark-soft: #242424;
+  --white: #ffffff;
+  --off-white: #f7f7f5;
+  --light-gray: #eeeeec;
+  --gray: #777777;
+
+  --green: #149447;
+  --green-dark: #0f7538;
+  --red: #d92d2d;
+
+  --radius: 18px;
+  --shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+
+  --container: 1180px;
+}
+
+
+/* =========================
+   RESET
+   ========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(92%, var(--container));
+  margin: 0 auto;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.header {
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid #ececec;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.brand-name {
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.brand-subtitle {
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navigation a {
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: 0.2s ease;
+  position: relative;
+}
+
+.navigation a:hover,
+.navigation a.active {
+  color: var(--green);
+}
+
+.navigation a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 3px;
+  border-radius: 5px;
+  background: var(--green);
+}
+
+.languages {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.languages a {
+  border: 1px solid #dddddd;
+  padding: 6px 8px;
+  border-radius: 7px;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.languages a:hover,
+.languages a.active {
+  background: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
+
+
+/* =========================
+   HERO
+   ========================= */
+
+.hero {
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+
+  background:
+    radial-gradient(
+      circle at 80% 25%,
+      rgba(20, 148, 71, 0.25),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #101010 0%,
+      #1c1c1c 55%,
+      #101010 100%
+    );
+
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  right: -130px;
+  bottom: -180px;
+  border-radius: 50%;
+  border: 70px solid rgba(217, 45, 45, 0.10);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 90px 0;
+}
+
+.eyebrow {
+  display: inline-block;
+  color: #69d890;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  font-size: 0.78rem;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  max-width: 850px;
+  font-size: clamp(3rem, 7vw, 5.8rem);
+  line-height: 0.98;
+  letter-spacing: -4px;
+  font-weight: 900;
+}
+
+.hero-text {
+  max-width: 680px;
+  font-size: 1.15rem;
+  color: #d3d3d3;
+  margin-top: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 38px;
+}
+
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 25px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  transition: 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--green);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--green-dark);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.btn-light {
+  background: var(--white);
+  color: var(--black);
+}
+
+.btn-whatsapp {
+  background: var(--green);
+  color: var(--white);
+  margin-top: 25px;
+}
+
+
+/* =========================
+   GENERAL SECTIONS
+   ========================= */
+
+.section {
+  padding: 100px 0;
+}
+
+.section-heading {
+  max-width: 720px;
+  margin-bottom: 50px;
+}
+
+.section-heading > span,
+.section-label {
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.section-heading h2,
+.experience h2,
+.final-cta h2 {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-top: 10px;
+}
+
+.section-heading p {
+  color: var(--gray);
+  margin-top: 15px;
+  font-size: 1.05rem;
+}
+
+
+/* =========================
+   SERVICES
+   ========================= */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.service-card {
+  background: var(--off-white);
+  border: 1px solid #eeeeea;
+  border-radius: var(--radius);
+  padding: 34px 28px;
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadow);
+  background: var(--white);
+}
+
+.service-icon {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.service-card h3 {
+  font-size: 1.25rem;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+.service-card p {
+  color: var(--gray);
+  font-size: 0.92rem;
+}
+
+.service-card a {
+  margin-top: auto;
+  padding-top: 25px;
+  color: var(--green);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+
+/* =========================
+   EXPERIENCE
+   ========================= */
+
+.experience {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 90px;
+  align-items: center;
+}
+
+.experience p {
+  color: var(--gray);
+  margin-top: 25px;
+  max-width: 550px;
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 25px;
+  color: var(--green);
+  font-weight: 800;
+}
+
+.advantages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.advantage {
+  min-height: 145px;
+  background: var(--white);
+  border-radius: 15px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 1px solid #ededed;
+}
+
+.advantage strong {
+  font-size: 1.15rem;
+}
+
+.advantage span {
+  color: var(--gray);
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+
+/* =========================
+   AUDIENCE
+   ========================= */
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.audience-card {
+  border-top: 4px solid var(--green);
+  background: var(--off-white);
+  padding: 32px 25px;
+  min-height: 175px;
+}
+
+.audience-card:nth-child(2) {
+  border-color: var(--red);
+}
+
+.audience-card:nth-child(3) {
+  border-color: var(--black);
+}
+
+.audience-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.audience-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+
+/* =========================
+   PROMO CITTÀ
+   ========================= */
+
+.promo-preview {
+  background: var(--black);
+  color: var(--white);
+  padding: 100px 0;
+}
+
+.section-heading.light p {
+  color: #aaaaaa;
+}
+
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.city-card {
+  background: var(--dark-soft);
+  border: 1px solid #333333;
+  border-radius: var(--radius);
+  padding: 35px 25px;
+  transition: 0.25s ease;
+}
+
+.city-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--green);
+}
+
+.city-card span {
+  font-size: 2rem;
+}
+
+.city-card h3 {
+  font-size: 1.4rem;
+  margin-top: 25px;
+}
+
+.center-button {
+  text-align: center;
+  margin-top: 45px;
+}
+
+
+/* =========================
+   FINAL CTA
+   ========================= */
+
+.final-cta {
+  padding: 110px 0;
+  text-align: center;
+  background: var(--off-white);
+}
+
+.final-cta .container {
+  max-width: 800px;
+}
+
+.final-cta p:not(.eyebrow) {
+  max-width: 600px;
+  margin: 20px auto 0;
+  color: var(--gray);
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+  background: #0d0d0d;
+  color: var(--white);
+  padding: 70px 0 25px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+}
+
+.footer h3 {
+  font-size: 1.5rem;
+}
+
+.footer h4 {
+  margin-bottom: 18px;
+}
+
+.footer p {
+  color: #9b9b9b;
+  max-width: 390px;
+  font-size: 0.88rem;
+  margin-top: 8px;
+}
+
+.footer a {
+  display: block;
+  color: #bbbbbb;
+  font-size: 0.88rem;
+  margin: 9px 0;
+}
+
+.footer a:hover {
+  color: var(--green);
+}
+
+.footer-bottom {
+  border-top: 1px solid #292929;
+  margin-top: 50px;
+  padding-top: 25px;
+}
+
+
+/* =========================
+   FLOATING WHATSAPP
+   ========================= */
+
+.whatsapp-floating {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #25d366;
+  color: #ffffff;
+
+  padding: 12px 18px;
+  border-radius: 50px;
+
+  font-size: 0.86rem;
+  font-weight: 800;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  transition: 0.25s ease;
+}
+
+.whatsapp-floating:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.28);
+}
+
+.whatsapp-icon {
+  font-size: 1.35rem;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1000px) {
+
+  .navigation {
+    gap: 16px;
+  }
+
+  .cards-grid,
+  .audience-grid,
+  .city-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .experience-grid {
+    gap: 50px;
+  }
+}
+
+
+@media (max-width: 800px) {
+
+  .nav-container {
+    flex-wrap: wrap;
+    padding: 18px 0;
+  }
+
+  .navigation {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+
+  .navigation a {
+    white-space: nowrap;
+  }
+
+  .hero {
+    min-height: 570px;
+  }
+
+  .hero h1 {
+    letter-spacing: -2.5px;
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section,
+  .experience,
+  .promo-preview {
+    padding: 75px 0;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .cards-grid,
+  .audience-grid,
+  .city-grid,
+  .advantages,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    letter-spacing: -2px;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .section-heading h2,
+  .experience h2,
+  .final-cta h2 {
+    font-size: 2.3rem;
+  }
+
+  .footer-grid {
+    gap: 35px;
+  }
+
+  .whatsapp-text {
+    display: none;
+  }
+
+  .whatsapp-floating {
+    width: 58px;
+    height: 58px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .whatsapp-icon {
+    font-size: 1.6rem;
+  }
+}
