@@ -25,3 +25,13 @@ Importare il repository in Vercel come progetto statico. Nessun build command ri
 - Indirizzo completo + mappa
 - Form email client-side senza email visibile in pagina
 - Migliorato allineamento catalogo e animazioni
+
+
+## V1.3
+- Hero con collage floating premium
+- Card servizi perfettamente allineate, colori brand e hover
+- Icone esperienza più visibili e colorate
+- Card Chi siamo allineate e illustrate
+- Monumenti Promo Città più visibili e raffinati
+- Promo Parigi senza 'Silhouette'
+- Contatti: visualizzazione 'Ciccio Pubblicità' (dati fiscali nel footer invariati)
