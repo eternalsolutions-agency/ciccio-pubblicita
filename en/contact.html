@@ -29,7 +29,35 @@
     </div>
   </div>
 </header>
-<main><section class="page-hero"><div class="container"><div class="breadcrumbs">Home / Contacts</div><h1>Tell us about your project</h1><p>Contact us directly by phone or WhatsApp for information and quotations.</p></div></section><section class="section"><div class="container contact-grid"><div><div class="section-heading"><span class="section-label">Contacts</span><h2>CiccioPubblicita di Francesco Calamaio</h2><p>Based in Termini Imerese (PA), Sicily.</p></div><div class="contact-box"><div class="contact-row"><strong>Phone</strong><a href="tel:+393518392570">351 839 2570</a></div><div class="contact-row"><strong>WhatsApp</strong><a href="https://wa.me/393518392570" target="_blank" rel="noopener">Open chat</a></div><div class="contact-row"><strong>VAT No.</strong><span>07104960823</span></div><div class="contact-row"><strong>Tax code</strong><span>CLMFNC72P11L112X</span></div></div></div><div class="contact-cta"><span class="section-label">Fast quote</span><h2>Message us on WhatsApp</h2><p>Tell us the product, quantity and customisation required. If possible, attach your logo or artwork.</p><a class="btn btn-primary" href="https://wa.me/393518392570?text=Hello%20Ciccio%20Pubblicit%C3%A0%2C%20I%20would%20like%20to%20request%20a%20quote." target="_blank" rel="noopener">Request a quote</a></div></div></section></main>
+<main><section class="page-hero"><div class="container"><div class="breadcrumbs">Home / Contacts</div><h1>Tell us about your project</h1><p>Contact us directly by phone or WhatsApp for information and quotations.</p></div></section><section class="section"><div class="container contact-grid"><div><div class="section-heading"><span class="section-label">Contacts</span><h2>CiccioPubblicita di Francesco Calamaio</h2><p>Based in Termini Imerese (PA), Sicily.</p></div><div class="contact-box"><div class="contact-row"><strong>Phone</strong><a href="tel:+393518392570">351 839 2570</a></div><div class="contact-row"><strong>WhatsApp</strong><a href="https://wa.me/393518392570" target="_blank" rel="noopener">Open chat</a></div><div class="contact-row"><strong>Address</strong><span>Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA), Italy</span></div><div class="contact-row"><strong>VAT No.</strong><span>07104960823</span></div><div class="contact-row"><strong>Tax code</strong><span>CLMFNC72P11L112X</span></div></div></div>
+<div class="contact-cta">
+  <span class="section-label">Information request</span>
+  <h2>Information request</h2>
+  <form class="contact-form" onsubmit="return sendContactEmail(event)">
+    <div><label for="cf-name">Name and surname</label><input id="cf-name" name="name" required></div>
+    <div><label for="cf-phone">Phone</label><input id="cf-phone" name="phone"></div>
+    <div><label for="cf-subject">Subject</label><input id="cf-subject" name="subject" required></div>
+    <div><label for="cf-message">Message</label><textarea id="cf-message" name="message" required></textarea></div>
+    <button class="btn btn-primary" type="submit">Send request</button>
+    <p class="form-note">Submitting the form will open your email application with a pre-filled message.</p>
+  </form>
+</div>
+<script>
+function sendContactEmail(event){
+  event.preventDefault();
+  const f=event.currentTarget;
+  const to='pubblicita'+'.'+'calamaio'+'@'+'gmail.com';
+  const body = 'Name and surname: '+f.name.value+'
+Phone: '+f.phone.value+'
+Subject: '+f.subject.value+'
+
+Message:
+'+f.message.value;
+  window.location.href='mailto:'+to+'?subject='+encodeURIComponent('Information request from Ciccio Pubblicità website: '+f.subject.value)+'&body='+encodeURIComponent(body);
+  return false;
+}
+</script>
+</div></section><section class="section soft"><div class="container"><div class="section-heading"><span class="section-label">Where we are</span><h2>Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA), Italy</h2></div><div class="map-wrap"><iframe src="https://www.google.com/maps?q=Via+Emanuela+Setti+Carraro+31%2C+90018+Termini+Imerese+PA&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Where we are"></iframe></div></div></section></main>
 <footer class="footer">
   <div class="container footer-grid">
     <div>
@@ -39,7 +67,7 @@
     <div><h4>Explore</h4><a href="/en/about.html">About us</a><a href="/en/services.html">Services</a><a href="/en/promotions.html">Promotions</a><a href="/en/contact.html">Contacts</a></div>
     <div>
       <h4>Contacts</h4>
-      <p>Termini Imerese (PA), Italy</p>
+      <p class="footer-address">Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA), Italy</p>
       <a href="tel:+393518392570">351 839 2570</a>
       <a href="https://wa.me/393518392570" target="_blank" rel="noopener">WhatsApp</a>
       <a href="/en/privacy.html">Privacy</a>

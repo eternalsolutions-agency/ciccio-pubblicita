@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+<g fill="none" stroke="#111" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+
+<circle cx="385" cy="255" r="155"/>
+<circle cx="385" cy="255" r="110"/>
+<path d="M505 105 650 25"/>
+<path d="M540 85 625 170"/>
+<path d="M300 250c35-60 105-60 150 0s115 60 150 0"/>
+<path d="M300 300c35-60 105-60 150 0s115 60 150 0"/>
+
+</g></svg>

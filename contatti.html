@@ -31,8 +31,36 @@
 </header>
 <main><section class="page-hero"><div class="container"><div class="breadcrumbs">Home / Contatti</div><h1>Parliamo del tuo progetto</h1><p>Per ricevere informazioni o un preventivo puoi contattarci direttamente per telefono o WhatsApp.</p></div></section>
 <section class="section"><div class="container contact-grid"><div><div class="section-heading"><span class="section-label">Contatti</span><h2>CiccioPubblicita di Francesco Calamaio</h2><p>Siamo a Termini Imerese (PA) e lavoriamo su personalizzazione, abbigliamento, gadget e articoli promozionali.</p></div>
-<div class="contact-box"><div class="contact-row"><strong>Telefono</strong><a href="tel:+393518392570">351 839 2570</a></div><div class="contact-row"><strong>WhatsApp</strong><a target="_blank" rel="noopener" href="https://wa.me/393518392570">Apri la chat</a></div><div class="contact-row"><strong>Sede</strong><span>Termini Imerese (PA)</span></div><div class="contact-row"><strong>P. IVA</strong><span>07104960823</span></div><div class="contact-row"><strong>Codice Fiscale</strong><span>CLMFNC72P11L112X</span></div></div></div>
-<div class="contact-cta"><span class="section-label">Preventivo rapido</span><h2>Scrivici su WhatsApp</h2><p>Indicaci il prodotto, la quantità, il tipo di personalizzazione e, se possibile, allega il logo o la grafica. Ti risponderemo per definire la soluzione più adatta.</p><a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/393518392570?text=Ciao%20Ciccio%20Pubblicit%C3%A0%2C%20vorrei%20richiedere%20un%20preventivo.">Richiedi un preventivo</a></div></div></section></main>
+<div class="contact-box"><div class="contact-row"><strong>Telefono</strong><a href="tel:+393518392570">351 839 2570</a></div><div class="contact-row"><strong>WhatsApp</strong><a target="_blank" rel="noopener" href="https://wa.me/393518392570">Apri la chat</a></div><div class="contact-row"><strong>Sede</strong><span>Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA)</span></div><div class="contact-row"><strong>P. IVA</strong><span>07104960823</span></div><div class="contact-row"><strong>Codice Fiscale</strong><span>CLMFNC72P11L112X</span></div></div></div>
+
+<div class="contact-cta">
+  <span class="section-label">Richiesta informazioni</span>
+  <h2>Richiesta informazioni</h2>
+  <form class="contact-form" onsubmit="return sendContactEmail(event)">
+    <div><label for="cf-name">Nome e cognome</label><input id="cf-name" name="name" required></div>
+    <div><label for="cf-phone">Telefono</label><input id="cf-phone" name="phone"></div>
+    <div><label for="cf-subject">Oggetto</label><input id="cf-subject" name="subject" required></div>
+    <div><label for="cf-message">Messaggio</label><textarea id="cf-message" name="message" required></textarea></div>
+    <button class="btn btn-primary" type="submit">Invia richiesta</button>
+    <p class="form-note">Compilando il modulo si aprirà il tuo programma email con il messaggio già pronto.</p>
+  </form>
+</div>
+<script>
+function sendContactEmail(event){
+  event.preventDefault();
+  const f=event.currentTarget;
+  const to='pubblicita'+'.'+'calamaio'+'@'+'gmail.com';
+  const body = 'Nome e cognome: '+f.name.value+'
+Telefono: '+f.phone.value+'
+Oggetto: '+f.subject.value+'
+
+Messaggio:
+'+f.message.value;
+  window.location.href='mailto:'+to+'?subject='+encodeURIComponent('Richiesta informazioni dal sito Ciccio Pubblicità: '+f.subject.value)+'&body='+encodeURIComponent(body);
+  return false;
+}
+</script>
+</div></section><section class="section soft"><div class="container"><div class="section-heading"><span class="section-label">Dove siamo</span><h2>Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA)</h2></div><div class="map-wrap"><iframe src="https://www.google.com/maps?q=Via+Emanuela+Setti+Carraro+31%2C+90018+Termini+Imerese+PA&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Dove siamo"></iframe></div></div></section></main>
 <footer class="footer">
   <div class="container footer-grid">
     <div>
@@ -42,7 +70,7 @@
     <div><h4>Esplora</h4><a href="/chi-siamo.html">Chi siamo</a><a href="/servizi.html">Servizi</a><a href="/promozioni.html">Promozioni</a><a href="/contatti.html">Contatti</a></div>
     <div>
       <h4>Contatti</h4>
-      <p>Termini Imerese (PA)</p>
+      <p class="footer-address">Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA)</p>
       <a href="tel:+393518392570">351 839 2570</a>
       <a href="https://wa.me/393518392570" target="_blank" rel="noopener">WhatsApp</a>
       <a href="/privacy.html">Privacy</a>
