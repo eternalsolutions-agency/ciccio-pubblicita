@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cicciopubblicita.com/sitemap.xml
