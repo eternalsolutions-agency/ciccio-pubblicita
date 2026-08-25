@@ -653,3 +653,15 @@ button{font:inherit}
  .service-steps{grid-template-columns:1fr}
  .service-actions{align-items:flex-start;flex-direction:column}
 }
+/* FIX CONTATTI - testo leggibile */
+.contact-page-hero h1 {
+  color: #ffffff !important;
+}
+
+.contact-page-hero p {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.contact-page-hero .breadcrumbs {
+  color: rgba(255, 255, 255, 0.80) !important;
+}
