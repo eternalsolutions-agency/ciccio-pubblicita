@@ -610,3 +610,46 @@ button{font:inherit}
  .owner-photo{max-width:none}
  .stats .stat.stat-photo{min-height:175px}
 }
+
+/* ===== V2.4 — Pagina Servizi commerciale ===== */
+.services-page-hero{color:#171717;background:linear-gradient(135deg,#f3fff7,#fff)}
+.services-page-hero h1,.services-page-hero p,.services-page-hero .breadcrumbs{color:#171717!important}
+.services-hero-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);gap:48px;align-items:center}
+.services-hero-photo img{display:block;width:100%;height:330px;object-fit:cover;border-radius:26px;box-shadow:0 20px 45px rgba(0,0,0,.13)}
+.services-commercial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:stretch}
+.service-commercial-card{display:grid;grid-template-columns:210px minmax(0,1fr);min-height:310px;border:1px solid var(--line);border-radius:22px;background:#fff;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.055);transition:transform .3s ease,box-shadow .3s ease}
+.service-commercial-card:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(0,0,0,.10)}
+.service-commercial-photo{overflow:hidden;background:#f3f3f3}
+.service-commercial-photo img{width:100%;height:100%;min-height:310px;object-fit:cover;display:block;transition:transform .5s ease}
+.service-commercial-card:hover .service-commercial-photo img{transform:scale(1.045)}
+.service-commercial-body{padding:26px;display:flex;flex-direction:column}
+.service-number{font-size:.72rem;font-weight:950;letter-spacing:.12em;color:var(--green);margin-bottom:8px}
+.service-commercial-body h3{font-size:1.28rem;margin:0 0 10px;min-height:2.5em}
+.service-commercial-body p{font-size:.9rem;line-height:1.65;color:#666;margin:0 0 20px}
+.service-actions{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.service-actions a:not(.text-link){font-size:.73rem;font-weight:900;text-decoration:none;color:#fff;background:var(--green);padding:9px 12px;border-radius:999px}
+.service-actions a:not(.text-link):hover{transform:translateY(-1px)}
+.services-process{padding:80px 0;background:#111;color:#fff}
+.service-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.service-steps>div{border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:24px;background:rgba(255,255,255,.045)}
+.service-steps strong{display:block;color:#67d98c;font-size:1.4rem;margin-bottom:22px}
+.service-steps h3{margin:0 0 8px;font-size:1rem;color:#fff}
+.service-steps p{margin:0;font-size:.82rem;color:rgba(255,255,255,.7);line-height:1.55}
+.services-final-cta{text-align:center}
+.services-final-buttons{justify-content:center}
+@media(max-width:1050px){
+ .services-commercial-grid{grid-template-columns:1fr}
+ .service-commercial-card{grid-template-columns:240px minmax(0,1fr)}
+}
+@media(max-width:800px){
+ .services-hero-grid{grid-template-columns:1fr;gap:25px}
+ .services-hero-photo img{height:235px}
+ .service-commercial-card{grid-template-columns:1fr}
+ .service-commercial-photo img{height:210px;min-height:210px}
+ .service-commercial-body h3{min-height:0}
+ .service-steps{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+ .service-steps{grid-template-columns:1fr}
+ .service-actions{align-items:flex-start;flex-direction:column}
+}
