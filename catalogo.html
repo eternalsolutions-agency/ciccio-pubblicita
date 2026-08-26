@@ -16,11 +16,12 @@ let activeCategory='all',activeType='all';
 function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function render(){
  const q=search.value.toLowerCase().trim();
- const items=window.CICCIO_CATALOGO.filter(x=>(activeCategory==='all'||x.category===activeCategory)&&(activeType==='all'||x.type===activeType)&&(!q||x.search.includes(q)));
+ const catalog=Array.isArray(window.CICCIO_CATALOGO)?window.CICCIO_CATALOGO:[];
+ const items=catalog.filter(x=>(activeCategory==='all'||x.category===activeCategory)&&(activeType==='all'||x.type===activeType)&&(!q||x.search.includes(q)));
  count.textContent=items.length+' prodotti';
  grid.innerHTML=items.map(x=>{
-  const ref=(x.code?x.code+' - ':'')+x.title;
-  const msg=encodeURIComponent('Salve, vorrei informazioni e un preventivo per ARTICOLO '+ref+'.');
+  const ref=x.code?(x.code+' - '+x.title):x.title;
+  const msg=encodeURIComponent('Salve, vorrei richiedere un preventivo per ARTICOLO '+ref+'.');
   const price=x.price?`<div class="catalog-price"><span>Offerta</span><strong>${esc(x.price)}</strong><small>IVA inclusa${x.qty?' · '+esc(x.qty)+' pz.':''}</small></div>`:`<div class="catalog-price quote-only"><strong>Richiedi preventivo</strong><small>Prezzo su richiesta</small></div>`;
   return `<article class="catalog-card"><button class="catalog-product-image catalog-image-open" type="button" data-image="/catalogo-hd/pagina-${String(x.source_page).padStart(3,'0')}.jpg" aria-label="Ingrandisci ${esc(x.title)}" style="background-image:url('/${x.image}');background-position:center ${x.focus}%"></button><div class="catalog-card-body"><div class="catalog-meta"><span>${esc(x.category)}</span><span>${esc(x.type)}</span></div><h2>${esc(x.title)}</h2>${x.code?`<div class="catalog-code">Cod. ${esc(x.code)}</div>`:''}<p>${esc(x.summary)}</p>${price}<div class="card-actions"><a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/393518392570?text=${msg}">Richiedi preventivo</a></div></div></article>`;
  }).join('');
