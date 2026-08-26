@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Catalogo | Ciccio Pubblicità</title>
-<meta name="description" content="Catalogo prodotti personalizzabili Ciccio Pubblicità. Prezzi IVA inclusa e spedizione gratuita da 150 euro.">
-<link rel="stylesheet" href="assets/css/style.css">
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catalogo | Ciccio Pubblicità</title><meta name="description" content="Catalogo prodotti personalizzabili Ciccio Pubblicità. Prezzi IVA inclusa e spedizione gratuita da 150 euro.">
+<link rel="stylesheet" href="/assets/css/style.css"><link rel="icon" href="/assets/images/logo-ciccio-pubblicita.png">
 <style>
-.catalog-new{padding:38px 0 70px}.catalog-notice{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 22px}.catalog-notice span{background:#fff;border:1px solid #e8e8e8;border-radius:999px;padding:9px 14px;font-weight:700}.catalog-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,320px);gap:12px;margin:18px 0 24px}.catalog-toolbar input,.catalog-toolbar select{width:100%;min-height:50px;border:1px solid #d8d8d8;border-radius:12px;padding:0 15px;background:#fff;font:inherit}.catalog-count{margin:0 0 16px;color:#666}.catalog-new-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.catalog-new-card{background:#fff;border:1px solid #e8e8e8;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);display:flex;flex-direction:column}.catalog-new-image{border:0;background:#f6f6f6;padding:0;cursor:zoom-in;aspect-ratio:4/3;overflow:hidden}.catalog-new-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}.catalog-new-image:hover img{transform:scale(1.025)}.catalog-new-body{padding:18px;display:flex;flex-direction:column;flex:1}.catalog-new-category{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;opacity:.68}.catalog-new-body h2{font-size:1.16rem;margin:7px 0 8px}.catalog-new-body p{font-size:.94rem;line-height:1.45;color:#555;margin:0 0 14px}.catalog-new-price{font-size:1.1rem;font-weight:800;margin:auto 0 14px}.catalog-new-empty{text-align:center;padding:45px 15px;color:#666}.catalog-new-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:22px;z-index:99999}.catalog-new-modal.open{display:flex}.catalog-new-modal img{max-width:96vw;max-height:92vh;object-fit:contain;background:#fff}.catalog-new-close{position:absolute;top:14px;right:18px;border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:28px;cursor:pointer}.catalog-download-wrap{margin-top:18px}@media(max-width:900px){.catalog-new-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.catalog-toolbar{grid-template-columns:1fr}.catalog-new-grid{grid-template-columns:1fr}.catalog-new{padding-top:24px}}
-
-/* Catalogo: stile coerente con Promozioni */
-.catalog-new-card .catalog-new-body{padding:20px}
-.catalog-new-card .catalog-new-category{display:inline-flex;align-self:flex-start;background:#f1f1f1;border-radius:999px;padding:6px 10px;font-size:.75rem;font-weight:800;text-transform:none;letter-spacing:0;opacity:1;margin-bottom:5px}
-.catalog-new-card .catalog-new-body h2{font-size:1.25rem;margin:7px 0 8px}
-.catalog-new-card .catalog-new-price{font-size:1.45rem;font-weight:800;margin:auto 0 16px;color:inherit}
-.catalog-new-card .catalog-new-price small{font-size:.72rem;font-weight:600}
-.catalog-new-card .catalog-new-price.no-price{font-size:1rem}
-.catalog-new-card .catalog-request-btn{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 18px;border-radius:12px;background:#25D366!important;color:#fff!important;border:0;text-decoration:none;font-weight:800;transition:transform .2s ease,filter .2s ease}
-.catalog-new-card .catalog-request-btn:hover{transform:translateY(-1px);filter:brightness(.94)}
-
-</style>
-</head>
-<body>
+.catalog-section{padding:38px 0 70px}.catalog-notice{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 22px}.catalog-notice span{background:#fff;border:1px solid #e8e8e8;border-radius:999px;padding:9px 14px;font-weight:700}
+.catalog-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,320px);gap:12px;margin:18px 0 14px}.catalog-toolbar input,.catalog-toolbar select{width:100%;min-height:50px;border:1px solid #d8d8d8;border-radius:12px;padding:0 15px;background:#fff;font:inherit}.catalog-count{margin:0 0 18px;color:#666}
+.catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.catalog-card{background:#fff;border:1px solid #e8e8e8;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);display:flex;flex-direction:column}.catalog-image-open{border:0;background:#f6f6f6;padding:0;cursor:zoom-in;aspect-ratio:4/3;overflow:hidden}.catalog-image-open img{width:100%;height:100%;object-fit:cover;display:block}.catalog-card-body{padding:20px;display:flex;flex-direction:column;flex:1}.catalog-card .badge{align-self:flex-start}.catalog-card h3{margin:10px 0 8px}.catalog-code{font-size:.88rem;font-weight:800;margin:0 0 8px}.catalog-summary{color:#555;line-height:1.45;margin:0 0 8px}.catalog-offer{font-size:.88rem;font-weight:700;margin:0 0 14px}.catalog-card .price{margin-top:auto;margin-bottom:14px}.catalog-card .price small{display:block}.catalog-card .catalog-wa{display:flex;width:100%;justify-content:center;background:#25D366!important;color:#fff!important;border-color:#25D366!important}.catalog-empty{text-align:center;padding:45px 15px;color:#666}.catalog-download{margin-top:18px}
+.catalog-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;padding:22px;z-index:99999}.catalog-lightbox.open{display:flex}.catalog-lightbox img{max-width:96vw;max-height:92vh;object-fit:contain;background:#fff}.catalog-lightbox-close{position:absolute;top:14px;right:18px;border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:28px;cursor:pointer}
+@media(max-width:900px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.catalog-toolbar{grid-template-columns:1fr}.catalog-grid{grid-template-columns:1fr}}
+</style></head><body>
 <header class="header">
   <div class="container nav-container">
     <a class="brand" href="/" aria-label="Ciccio Pubblicità">
@@ -37,43 +24,36 @@
     </div>
   </div>
 </header>
-<main>
-<section class="page-hero"><div class="container"><span class="eyebrow">CATALOGO</span><h1>Catalogo prodotti personalizzabili</h1><p>Scopri articoli promozionali, abbigliamento e gadget personalizzabili per aziende, eventi, associazioni e privati.</p><div class="catalog-download-wrap"><a class="btn btn-primary" href="Catalogo-Ciccio-Pubblicita-2026.pdf" download>Scarica catalogo PDF</a></div></div></section>
-<section class="catalog-new"><div class="container">
-<div class="catalog-notice"><span>✓ Prezzi IVA inclusa</span><span>✓ Spedizione gratuita da 150 €</span><span>✓ Preventivo diretto su WhatsApp</span></div>
-<div class="catalog-toolbar"><input id="catalogSearch" type="search" placeholder="Cerca prodotto, codice o parola chiave…" aria-label="Cerca nel catalogo"><select id="catalogCategory" aria-label="Filtra per categoria"><option value="all">Tutte le categorie</option></select></div>
-<p id="catalogCount" class="catalog-count"></p><div id="catalogGrid" class="catalog-new-grid"></div><div id="catalogEmpty" class="catalog-new-empty" hidden>Nessun prodotto trovato. Prova un'altra ricerca.</div>
-</div></section>
-</main>
-<footer class="footer"><div class="container footer-grid"><div><h3>Ciccio Pubblicità</h3><p>Pubblicità & Gadget</p><p>Personalizzazione di abbigliamento, accessori e articoli promozionali.</p></div><div><h4>Catalogo</h4><a href="Catalogo-Ciccio-Pubblicita-2026.pdf" download>Scarica catalogo PDF</a></div><div><h4>Contatti</h4><p class="footer-address">Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA)</p><a href="tel:+393518392570">351 839 2570</a></div></div><div class="container footer-bottom"><p>© 2026 CiccioPubblicita di Francesco Calamaio — P. IVA 07104960823 — C.F. CLMFNC72P11L112X</p></div></footer>
-<a href="https://wa.me/393518392570" class="whatsapp-floating" target="_blank" rel="noopener"><span class="whatsapp-icon">☏</span><span class="whatsapp-text">Richiedi preventivo</span></a>
-<div id="catalogModal" class="catalog-new-modal" aria-hidden="true"><button class="catalog-new-close" aria-label="Chiudi">×</button><img id="catalogModalImg" alt="Immagine catalogo ingrandita"></div>
-<script src="catalogo-data.js"></script>
+<main><section class="page-hero"><div class="container"><div class="breadcrumbs">Home / Catalogo</div><h1>Catalogo prodotti personalizzabili</h1><p>Scopri articoli promozionali, abbigliamento e gadget personalizzabili per aziende, eventi, associazioni e privati.</p><div class="catalog-download"><a class="btn btn-primary" href="/Catalogo-Ciccio-Pubblicita-2026.pdf" download>Scarica catalogo PDF</a></div></div></section>
+<section class="catalog-section"><div class="container"><div class="catalog-notice"><span>✓ Prezzi IVA inclusa</span><span>✓ Spedizione gratuita da 150 €</span><span>✓ Preventivo diretto su WhatsApp</span></div><div class="catalog-toolbar"><input id="catalogSearch" type="search" placeholder="Cerca prodotto, codice o parola chiave…"><select id="catalogCategory"><option value="all">Tutte le categorie</option></select></div><p id="catalogCount" class="catalog-count"></p><div id="catalogGrid" class="catalog-grid"></div><div id="catalogEmpty" class="catalog-empty" hidden>Nessun prodotto trovato.</div></div></section></main>
+<div class="catalog-lightbox" id="catalogLightbox"><button class="catalog-lightbox-close">×</button><img id="catalogLightboxImg" alt=""></div>
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <img class="footer-logo" src="/assets/images/logo-ciccio-pubblicita.png" alt="Ciccio Pubblicità">
+      <p>Personalizzazione di abbigliamento, accessori e articoli promozionali.</p>
+    </div>
+    <div><h4>Esplora</h4><a href="/chi-siamo.html">Chi siamo</a><a href="/servizi.html">Servizi</a><a href="/catalogo.html">Catalogo</a><a href="/promozioni.html">Promozioni</a><a href="/contatti.html">Contatti</a></div>
+    <div>
+      <h4>Contatti</h4>
+      <p class="footer-address">Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA)</p>
+      <a href="tel:+393518392570">351 839 2570</a>
+      <a href="https://wa.me/393518392570" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/cookie.html">Cookie</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© 2026 CiccioPubblicita di Francesco Calamaio — P. IVA 07104960823 — C.F. CLMFNC72P11L112X</p>
+  </div>
+<div class="footer-social"><span>Seguici sui social</span><div><a href="https://www.facebook.com/share/199Km23NHG/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><img src="/assets/images/facebook-logo.webp" alt="Facebook"></a><a href="https://www.instagram.com/cicciopubblicita?igsi=cDIydXEzZHY2bHA4" target="_blank" rel="noopener" aria-label="Instagram"><img src="/assets/images/instagram-logo.png" alt="Instagram"></a></div></div>
+</footer><a class="whatsapp-floating" href="https://wa.me/393518392570?text=Ciao%20Ciccio%20Pubblicit%C3%A0%2C%20vorrei%20ricevere%20un%20preventivo." target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.56c-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.59.13-.17.26-.68.84-.83 1.01-.15.17-.31.19-.57.06-.26-.13-1.1-.4-2.09-1.29-.77-.69-1.29-1.54-1.44-1.8-.15-.26-.02-.4.11-.53.12-.12.26-.31.39-.46.13-.15.17-.26.26-.44.09-.17.04-.33-.02-.46-.06-.13-.59-1.42-.81-1.94-.21-.51-.43-.44-.59-.45h-.5c-.17 0-.46.07-.7.33-.24.26-.92.9-.92 2.2s.94 2.55 1.07 2.73c.13.17 1.85 2.83 4.49 3.97.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.08 1.53-.63 1.75-1.23.22-.61.22-1.12.15-1.23-.06-.11-.24-.17-.5-.3z"/><path d="M16.02 3.2c-7.05 0-12.78 5.73-12.78 12.78 0 2.25.59 4.46 1.71 6.4L3.14 29l6.79-1.78a12.73 12.73 0 0 0 6.08 1.55h.01c7.05 0 12.78-5.73 12.78-12.78S23.07 3.2 16.02 3.2zm0 23.41h-.01a10.57 10.57 0 0 1-5.39-1.47l-.39-.23-4.03 1.06 1.08-3.93-.25-.4a10.58 10.58 0 1 1 8.99 4.97z"/></svg><span>Richiedi un preventivo</span></a>
+<script src="/assets/js/main.js"></script><script src="/catalogo-data.js"></script>
 <script>
-(()=>{
-const data=Array.isArray(window.CICCIO_CATALOGO)?window.CICCIO_CATALOGO:[];
-const grid=document.getElementById('catalogGrid'),search=document.getElementById('catalogSearch'),select=document.getElementById('catalogCategory'),empty=document.getElementById('catalogEmpty'),count=document.getElementById('catalogCount');
-const clean=s=>String(s||'').replace(/[\x00-\x1F]/g,' ').replace(/\s+/g,' ').trim();
-const esc=s=>clean(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-const findCode=t=>{t=clean(t);let m=t.match(/\b([A-Z]{1,4}\s?[-/]?\s?\d{2,5})\s*[-–]\s*([A-Za-zÀ-ÿ][^•€]{2,55})/i);if(m)return {code:clean(m[1]).toUpperCase(),name:clean(m[2])};m=t.match(/\b(\d{3,5})\s*[-–]\s*([A-Za-zÀ-ÿ][^•€]{2,55})/);return m?{code:m[1],name:clean(m[2])}:null};
-const findPrice=t=>{const ms=[...clean(t).matchAll(/€\s*(\d{1,4})\s*[,\.]\s*(\d{2})/g)];if(!ms.length)return'';const vals=ms.map(m=>({n:Number(m[1]+'.'+m[2]),s:`€ ${m[1]},${m[2]}`})).filter(x=>x.n>=1);return vals.length?vals[0].s:''};
-const items=data.filter(x=>x&&x.image&&x.category).map((x,i)=>{const full=clean(x.text),found=findCode(full),excerpt=clean(x.excerpt||full).slice(0,190);return {...x,_i:i,_full:full,_code:found?.code||'',_name:found?.name||x.category,_price:findPrice(full),_excerpt:excerpt}});
-[...new Set(items.map(x=>x.category))].sort((a,b)=>a.localeCompare(b,'it')).forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;select.appendChild(o)});
-function render(){
-const q=clean(search.value).toLowerCase(),cat=select.value;
-const shown=items.filter(x=>(cat==='all'||x.category===cat)&&(!q||`${x.category} ${x._code} ${x._name} ${x._full}`.toLowerCase().includes(q)));
-count.textContent=`${shown.length} risultati`;empty.hidden=shown.length!==0;
-grid.innerHTML=shown.map(x=>{
-const article=x._code?`ARTICOLO ${x._code}`:'ARTICOLO DEL CATALOGO';
-const title=x._code?`${x._code} - ${x._name}`:x._name;
-const msg=encodeURIComponent(`Salve, vorrei richiedere un preventivo per ${article} - ${x._name}.`);
-const price=x._price?`<div class="catalog-new-price">${esc(x._price)} <small>IVA inclusa</small></div>`:`<div class="catalog-new-price no-price">Prezzo su richiesta</div>`;
-return `<article class="catalog-new-card"><button class="catalog-new-image" data-img="${esc(x.image)}" aria-label="Ingrandisci ${esc(title)}"><img loading="lazy" src="${esc(x.image)}" alt="${esc(title)}"></button><div class="catalog-new-body"><span class="catalog-new-category">${esc(x.category)}</span><h2>${esc(title)}</h2><p>${esc(x._excerpt)}</p>${price}<div class="card-actions"><a class="catalog-request-btn" target="_blank" rel="noopener" href="https://wa.me/393518392570?text=${msg}">Richiedi preventivo</a></div></div></article>`;
-}).join('');
-document.querySelectorAll('.catalog-new-image').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.img)))
-}
-search.addEventListener('input',render);select.addEventListener('change',render);
-const modal=document.getElementById('catalogModal'),modalImg=document.getElementById('catalogModalImg');function openModal(src){modalImg.onerror=()=>{modalImg.onerror=null;modalImg.src=src};modalImg.src='catalogo-hd/'+src;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');modalImg.src='';document.body.style.overflow=''}document.querySelector('.catalog-new-close').onclick=closeModal;modal.onclick=e=>{if(e.target===modal)closeModal()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});render();
-})();
-</script>
-</body></html>
+(()=>{const all=Array.isArray(window.CICCIO_CATALOGO)?window.CICCIO_CATALOGO:[];const products=all.filter(p=>p&&p.price&&p.title&&p.image);
+const grid=document.getElementById('catalogGrid'),search=document.getElementById('catalogSearch'),category=document.getElementById('catalogCategory'),count=document.getElementById('catalogCount'),empty=document.getElementById('catalogEmpty');
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+[...new Set(products.map(p=>p.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'it')).forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;category.appendChild(o)});
+function render(){const q=search.value.trim().toLowerCase(),cat=category.value;const shown=products.filter(p=>(cat==='all'||p.category===cat)&&(!q||[p.title,p.code,p.category,p.type,p.summary,p.offer,p.search].join(' ').toLowerCase().includes(q)));count.textContent=`${shown.length} prodotti`;empty.hidden=shown.length!==0;grid.innerHTML=shown.map(p=>{const label=p.code?`ARTICOLO ${p.code}`:'ARTICOLO';const msg=encodeURIComponent(`Salve, vorrei richiedere un preventivo per ${label} - ${p.title}.`);return `<article class="catalog-card"><button class="catalog-image-open" data-image="${esc(p.image)}"><img src="/${esc(p.image)}" alt="${esc(p.title)}" loading="lazy"></button><div class="catalog-card-body"><span class="badge">${esc(p.category)}</span><h3>${esc(p.title)}</h3>${p.code?`<p class="catalog-code">ARTICOLO ${esc(p.code)}</p>`:''}${p.summary?`<p class="catalog-summary">${esc(p.summary)}</p>`:''}${p.offer?`<p class="catalog-offer">${esc(p.offer)}</p>`:''}<div class="price">${esc(p.price)} <small>IVA inclusa${p.qty?' · '+esc(p.qty)+' pz.':''}</small></div><div class="card-actions"><a class="btn btn-primary catalog-wa" href="https://wa.me/393518392570?text=${msg}" target="_blank" rel="noopener">Richiedi preventivo</a></div></div></article>`}).join('');document.querySelectorAll('.catalog-image-open').forEach(b=>b.onclick=()=>openLb(b.dataset.image))}
+const lb=document.getElementById('catalogLightbox'),img=document.getElementById('catalogLightboxImg');function openLb(src){img.onerror=()=>{img.onerror=null;img.src='/'+src};img.src='/catalogo-hd/'+src;lb.classList.add('open');document.body.style.overflow='hidden'}function closeLb(){lb.classList.remove('open');img.src='';document.body.style.overflow=''}document.querySelector('.catalog-lightbox-close').onclick=closeLb;lb.onclick=e=>{if(e.target===lb)closeLb()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});search.oninput=render;category.onchange=render;render();})();
+</script></body></html>
