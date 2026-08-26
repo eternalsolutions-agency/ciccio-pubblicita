@@ -37,29 +37,52 @@
 <div class="contact-cta">
   <span class="section-label">Richiesta informazioni</span>
   <h2>Richiesta informazioni</h2>
-  <form class="contact-form" onsubmit="return sendContactEmail(event)">
+  <form class="contact-form" id="contactForm">
     <div><label for="cf-name">Nome e cognome</label><input id="cf-name" name="name" required></div>
     <div><label for="cf-phone">Telefono</label><input id="cf-phone" name="phone"></div>
     <div><label for="cf-subject">Oggetto</label><input id="cf-subject" name="subject" required></div>
     <div><label for="cf-message">Messaggio</label><textarea id="cf-message" name="message" required></textarea></div>
+    <label class="privacy-check" style="display:flex;gap:10px;align-items:flex-start;font-size:14px">
+      <input type="checkbox" name="privacy_acceptance" value="Accettata" required style="margin-top:4px">
+      <span>Ho letto la <a href="/privacy.html" data-legal-popup="privacy">Privacy Policy</a> e acconsento al trattamento dei dati per rispondere alla mia richiesta.</span>
+    </label>
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
     <button class="btn btn-primary" type="submit">Invia richiesta</button>
-    <p class="form-note">Compilando il modulo si aprirà il tuo programma email con il messaggio già pronto.</p>
+    <p class="form-note" id="formStatus">La richiesta verrà inviata direttamente a Ciccio Pubblicità.</p>
   </form>
 </div>
 <script>
-function sendContactEmail(event){
+document.getElementById('contactForm').addEventListener('submit', async function(event){
   event.preventDefault();
-  const f=event.currentTarget;
-  const to='pubblicita'+'.'+'calamaio'+'@'+'gmail.com';
-  const body = 'Nome e cognome: '+f.name.value+'
-Telefono: '+f.phone.value+'
-Oggetto: '+f.subject.value+'
+  const form = event.currentTarget;
+  const button = form.querySelector('button[type="submit"]');
+  const status = document.getElementById('formStatus');
+  button.disabled = true;
+  button.textContent = 'Invio in corso...';
+  status.textContent = 'Invio della richiesta...';
 
-Messaggio:
-'+f.message.value;
-  window.location.href='mailto:'+to+'?subject='+encodeURIComponent('Richiesta informazioni dal sito Ciccio Pubblicità: '+f.subject.value)+'&body='+encodeURIComponent(body);
-  return false;
-}
+  const data = new FormData(form);
+  data.append('_subject', 'Nuova richiesta dal sito Ciccio Pubblicità - ' + form.subject.value);
+  data.append('_template', 'table');
+  data.append('_captcha', 'false');
+
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/pubblicitacalamaio@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    });
+    const result = await response.json();
+    if (!response.ok || result.success === 'false' || result.success === false) throw new Error('Invio non riuscito');
+    form.reset();
+    status.textContent = 'Richiesta inviata correttamente. Ti risponderemo il prima possibile.';
+  } catch (err) {
+    status.textContent = 'Non è stato possibile inviare la richiesta. Puoi contattarci tramite WhatsApp o email.';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Invia richiesta';
+  }
+});
 </script>
 </div></section><section class="section soft"><div class="container"><div class="section-heading"><span class="section-label">Dove siamo</span></div><div class="map-wrap"><div class="map-consent" style="min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px;text-align:center;background:#151515;color:#fff;border-radius:18px">
 <p style="max-width:620px;margin:0;color:#ddd">La mappa è un contenuto esterno di Google e viene caricata solo su tua richiesta.</p>
