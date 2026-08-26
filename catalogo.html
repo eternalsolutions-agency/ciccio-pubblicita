@@ -8,10 +8,35 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
 .catalog-new{padding:38px 0 70px}.catalog-notice{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 22px}.catalog-notice span{background:#fff;border:1px solid #e8e8e8;border-radius:999px;padding:9px 14px;font-weight:700}.catalog-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,320px);gap:12px;margin:18px 0 24px}.catalog-toolbar input,.catalog-toolbar select{width:100%;min-height:50px;border:1px solid #d8d8d8;border-radius:12px;padding:0 15px;background:#fff;font:inherit}.catalog-count{margin:0 0 16px;color:#666}.catalog-new-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.catalog-new-card{background:#fff;border:1px solid #e8e8e8;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);display:flex;flex-direction:column}.catalog-new-image{border:0;background:#f6f6f6;padding:0;cursor:zoom-in;aspect-ratio:4/3;overflow:hidden}.catalog-new-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}.catalog-new-image:hover img{transform:scale(1.025)}.catalog-new-body{padding:18px;display:flex;flex-direction:column;flex:1}.catalog-new-category{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;opacity:.68}.catalog-new-body h2{font-size:1.16rem;margin:7px 0 8px}.catalog-new-body p{font-size:.94rem;line-height:1.45;color:#555;margin:0 0 14px}.catalog-new-price{font-size:1.1rem;font-weight:800;margin:auto 0 14px}.catalog-new-empty{text-align:center;padding:45px 15px;color:#666}.catalog-new-modal{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:22px;z-index:99999}.catalog-new-modal.open{display:flex}.catalog-new-modal img{max-width:96vw;max-height:92vh;object-fit:contain;background:#fff}.catalog-new-close{position:absolute;top:14px;right:18px;border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:28px;cursor:pointer}.catalog-download-wrap{margin-top:18px}@media(max-width:900px){.catalog-new-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.catalog-toolbar{grid-template-columns:1fr}.catalog-new-grid{grid-template-columns:1fr}.catalog-new{padding-top:24px}}
+
+/* Catalogo: stile coerente con Promozioni */
+.catalog-new-card .catalog-new-body{padding:20px}
+.catalog-new-card .catalog-new-category{display:inline-flex;align-self:flex-start;background:#f1f1f1;border-radius:999px;padding:6px 10px;font-size:.75rem;font-weight:800;text-transform:none;letter-spacing:0;opacity:1;margin-bottom:5px}
+.catalog-new-card .catalog-new-body h2{font-size:1.25rem;margin:7px 0 8px}
+.catalog-new-card .catalog-new-price{font-size:1.45rem;font-weight:800;margin:auto 0 16px;color:inherit}
+.catalog-new-card .catalog-new-price small{font-size:.72rem;font-weight:600}
+.catalog-new-card .catalog-new-price.no-price{font-size:1rem}
+.catalog-new-card .catalog-request-btn{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:48px;padding:12px 18px;border-radius:12px;background:#25D366!important;color:#fff!important;border:0;text-decoration:none;font-weight:800;transition:transform .2s ease,filter .2s ease}
+.catalog-new-card .catalog-request-btn:hover{transform:translateY(-1px);filter:brightness(.94)}
+
 </style>
 </head>
 <body>
-<header class="header"><div class="container nav-container"><a href="index.html" class="brand"><span class="brand-name">Ciccio Pubblicità</span><span class="brand-subtitle">Pubblicità & Gadget</span></a><nav class="navigation"><a href="index.html">Home</a><a href="chi-siamo.html">Chi siamo</a><a href="servizi.html">Servizi</a><a href="catalogo.html" class="active">Catalogo</a><a href="promozioni.html">Promozioni</a><a href="contatti.html">Contatti</a></nav><div class="languages"><a href="catalogo.html" class="active">IT</a><a href="en/catalogue.html">EN</a><a href="de/katalog.html">DE</a></div></div></header>
+<header class="header">
+  <div class="container nav-container">
+    <a class="brand" href="/" aria-label="Ciccio Pubblicità">
+      <img class="brand-logo" src="/assets/images/logo-ciccio-pubblicita.png" alt="Ciccio Pubblicità - Pubblicità & Gadget">
+    </a>
+    <button class="menu-toggle" aria-expanded="false" aria-label="Menu">☰</button>
+    <nav class="navigation"><a href="/" class="">Home</a><a href="/chi-siamo.html" class="">Chi siamo</a><a href="/servizi.html" class="">Servizi</a><a href="/catalogo.html" class="active">Catalogo</a><a href="/promozioni.html" class="">Promozioni</a><a href="/contatti.html" class="">Contatti</a></nav>
+    <div class="header-social" aria-label="Social"><a href="https://www.facebook.com/share/199Km23NHG/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><img src="/assets/images/facebook-logo.webp" alt="Facebook"></a><a href="https://www.instagram.com/cicciopubblicita?igsi=cDIydXEzZHY2bHA4" target="_blank" rel="noopener" aria-label="Instagram"><img src="/assets/images/instagram-logo.png" alt="Instagram"></a></div>
+    <div class="languages">
+      <a href="/" class="active">IT</a>
+      <a href="/en/" class="">EN</a>
+      <a href="/de/" class="">DE</a>
+    </div>
+  </div>
+</header>
 <main>
 <section class="page-hero"><div class="container"><span class="eyebrow">CATALOGO</span><h1>Catalogo prodotti personalizzabili</h1><p>Scopri articoli promozionali, abbigliamento e gadget personalizzabili per aziende, eventi, associazioni e privati.</p><div class="catalog-download-wrap"><a class="btn btn-primary" href="Catalogo-Ciccio-Pubblicita-2026.pdf" download>Scarica catalogo PDF</a></div></div></section>
 <section class="catalog-new"><div class="container">
@@ -34,7 +59,19 @@ const findCode=t=>{t=clean(t);let m=t.match(/\b([A-Z]{1,4}\s?[-/]?\s?\d{2,5})\s*
 const findPrice=t=>{const ms=[...clean(t).matchAll(/€\s*(\d{1,4})\s*[,\.]\s*(\d{2})/g)];if(!ms.length)return'';const vals=ms.map(m=>({n:Number(m[1]+'.'+m[2]),s:`€ ${m[1]},${m[2]}`})).filter(x=>x.n>=1);return vals.length?vals[0].s:''};
 const items=data.filter(x=>x&&x.image&&x.category).map((x,i)=>{const full=clean(x.text),found=findCode(full),excerpt=clean(x.excerpt||full).slice(0,190);return {...x,_i:i,_full:full,_code:found?.code||'',_name:found?.name||x.category,_price:findPrice(full),_excerpt:excerpt}});
 [...new Set(items.map(x=>x.category))].sort((a,b)=>a.localeCompare(b,'it')).forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;select.appendChild(o)});
-function render(){const q=clean(search.value).toLowerCase(),cat=select.value;const shown=items.filter(x=>(cat==='all'||x.category===cat)&&(!q||`${x.category} ${x._code} ${x._name} ${x._full}`.toLowerCase().includes(q)));count.textContent=`${shown.length} risultati`;empty.hidden=shown.length!==0;grid.innerHTML=shown.map(x=>{const article=x._code?`ARTICOLO ${x._code}`:'ARTICOLO DEL CATALOGO';const title=x._code?`${x._code} - ${x._name}`:x._name;const msg=encodeURIComponent(`Salve, vorrei richiedere un preventivo per ${article} - ${x._name}.`);return `<article class="catalog-new-card"><button class="catalog-new-image" data-img="${esc(x.image)}" aria-label="Ingrandisci ${esc(title)}"><img loading="lazy" src="${esc(x.image)}" alt="${esc(title)}"></button><div class="catalog-new-body"><span class="catalog-new-category">${esc(x.category)}</span><h2>${esc(title)}</h2><p>${esc(x._excerpt)}</p>${x._price?`<div class="catalog-new-price">Da ${esc(x._price)} <small>IVA inclusa</small></div>`:'<div class="catalog-new-price"></div>'}<a class="btn btn-whatsapp" target="_blank" rel="noopener" href="https://wa.me/393518392570?text=${msg}">Richiedi preventivo</a></div></article>`}).join('');document.querySelectorAll('.catalog-new-image').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.img)))}
+function render(){
+const q=clean(search.value).toLowerCase(),cat=select.value;
+const shown=items.filter(x=>(cat==='all'||x.category===cat)&&(!q||`${x.category} ${x._code} ${x._name} ${x._full}`.toLowerCase().includes(q)));
+count.textContent=`${shown.length} risultati`;empty.hidden=shown.length!==0;
+grid.innerHTML=shown.map(x=>{
+const article=x._code?`ARTICOLO ${x._code}`:'ARTICOLO DEL CATALOGO';
+const title=x._code?`${x._code} - ${x._name}`:x._name;
+const msg=encodeURIComponent(`Salve, vorrei richiedere un preventivo per ${article} - ${x._name}.`);
+const price=x._price?`<div class="catalog-new-price">${esc(x._price)} <small>IVA inclusa</small></div>`:`<div class="catalog-new-price no-price">Prezzo su richiesta</div>`;
+return `<article class="catalog-new-card"><button class="catalog-new-image" data-img="${esc(x.image)}" aria-label="Ingrandisci ${esc(title)}"><img loading="lazy" src="${esc(x.image)}" alt="${esc(title)}"></button><div class="catalog-new-body"><span class="catalog-new-category">${esc(x.category)}</span><h2>${esc(title)}</h2><p>${esc(x._excerpt)}</p>${price}<div class="card-actions"><a class="catalog-request-btn" target="_blank" rel="noopener" href="https://wa.me/393518392570?text=${msg}">Richiedi preventivo</a></div></div></article>`;
+}).join('');
+document.querySelectorAll('.catalog-new-image').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.img)))
+}
 search.addEventListener('input',render);select.addEventListener('change',render);
 const modal=document.getElementById('catalogModal'),modalImg=document.getElementById('catalogModalImg');function openModal(src){modalImg.onerror=()=>{modalImg.onerror=null;modalImg.src=src};modalImg.src='catalogo-hd/'+src;modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');modalImg.src='';document.body.style.overflow=''}document.querySelector('.catalog-new-close').onclick=closeModal;modal.onclick=e=>{if(e.target===modal)closeModal()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});render();
 })();
