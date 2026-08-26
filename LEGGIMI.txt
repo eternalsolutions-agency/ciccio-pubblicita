@@ -1,0 +1,19 @@
+MODIFICHE CICCI0 PUBBLICITA - 26/08/2026
+
+Caricare su GitHub mantenendo esattamente le cartelle.
+File modificati:
+- index.html
+- chi-siamo.html
+- servizi.html
+- catalogo.html
+- catalogo-data.js
+- en/catalogue.html
+- de/katalog.html
+- assets/js/main.js
+- assets/images/home-stampa-transfer.jpeg
+- assets/images/chi-siamo-elaborazione.jpeg
+- assets/images/chi-siamo-colori.jpeg
+- assets/images/chi-siamo-tazza-mamma.jpeg
+- assets/images/servizi-siti-internet.jpg
+
+Catalogo: dati verificati sul PDF sorgente pagine stampate 3-119; corretto in particolare il blocco Calendari/Planning/Agende che risultava sfalsato e incompleto. Le immagini delle schede ora mostrano la pagina sorgente completa, evitando crop che potevano far apparire il prodotto sbagliato.
