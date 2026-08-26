@@ -48,7 +48,219 @@
   </div>
 <div class="footer-social"><span>Seguici sui social</span><div><a href="https://www.facebook.com/share/199Km23NHG/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><img src="/assets/images/facebook-logo.webp" alt="Facebook"></a><a href="https://www.instagram.com/cicciopubblicita?igsi=cDIydXEzZHY2bHA4" target="_blank" rel="noopener" aria-label="Instagram"><img src="/assets/images/instagram-logo.png" alt="Instagram"></a></div></div>
 </footer><a class="whatsapp-floating" href="https://wa.me/393518392570?text=Ciao%20Ciccio%20Pubblicit%C3%A0%2C%20vorrei%20ricevere%20un%20preventivo." target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.56c-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.59.13-.17.26-.68.84-.83 1.01-.15.17-.31.19-.57.06-.26-.13-1.1-.4-2.09-1.29-.77-.69-1.29-1.54-1.44-1.8-.15-.26-.02-.4.11-.53.12-.12.26-.31.39-.46.13-.15.17-.26.26-.44.09-.17.04-.33-.02-.46-.06-.13-.59-1.42-.81-1.94-.21-.51-.43-.44-.59-.45h-.5c-.17 0-.46.07-.7.33-.24.26-.92.9-.92 2.2s.94 2.55 1.07 2.73c.13.17 1.85 2.83 4.49 3.97.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.08 1.53-.63 1.75-1.23.22-.61.22-1.12.15-1.23-.06-.11-.24-.17-.5-.3z"/><path d="M16.02 3.2c-7.05 0-12.78 5.73-12.78 12.78 0 2.25.59 4.46 1.71 6.4L3.14 29l6.79-1.78a12.73 12.73 0 0 0 6.08 1.55h.01c7.05 0 12.78-5.73 12.78-12.78S23.07 3.2 16.02 3.2zm0 23.41h-.01a10.57 10.57 0 0 1-5.39-1.47l-.39-.23-4.03 1.06 1.08-3.93-.25-.4a10.58 10.58 0 1 1 8.99 4.97z"/></svg><span>Richiedi un preventivo</span></a>
-<script src="/assets/js/main.js"></script><script src="/catalogo-data.js"></script>
+<script src="/assets/js/main.js"></script><script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const products = Array.isArray(window.CICCIO_CATALOGO)
+    ? window.CICCIO_CATALOGO
+    : [];
+
+  const grid = document.getElementById("productsGrid");
+  const searchInput = document.getElementById("productSearch");
+  const categorySelect = document.getElementById("categoryFilter");
+  const typeSelect = document.getElementById("typeFilter");
+  const resultsCount = document.getElementById("resultsCount");
+
+  function euro(value) {
+    const n = Number(value);
+
+    if (!Number.isFinite(n)) {
+      return value || "Prezzo su richiesta";
+    }
+
+    return new Intl.NumberFormat("it-IT", {
+      style: "currency",
+      currency: "EUR"
+    }).format(n);
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function populateFilters() {
+    if (!categorySelect || !typeSelect) return;
+
+    const categories = [...new Set(
+      products.map(p => p.category).filter(Boolean)
+    )].sort();
+
+    const types = [...new Set(
+      products.map(p => p.type).filter(Boolean)
+    )].sort();
+
+    categorySelect.innerHTML =
+      '<option value="">Tutte le categorie</option>' +
+      categories.map(c =>
+        `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`
+      ).join("");
+
+    typeSelect.innerHTML =
+      '<option value="">Tutti i tipi</option>' +
+      types.map(t =>
+        `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`
+      ).join("");
+  }
+
+  function render() {
+    if (!grid) return;
+
+    const q = (searchInput?.value || "").trim().toLowerCase();
+    const category = categorySelect?.value || "";
+    const type = typeSelect?.value || "";
+
+    const filtered = products.filter(p => {
+
+      const searchable = [
+        p.title,
+        p.code,
+        p.summary,
+        p.category,
+        p.type,
+        p.search
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      const matchesSearch = !q || searchable.includes(q);
+      const matchesCategory = !category || p.category === category;
+      const matchesType = !type || p.type === type;
+
+      return matchesSearch && matchesCategory && matchesType;
+    });
+
+    if (resultsCount) {
+      resultsCount.textContent =
+        `${filtered.length} prodotti trovati`;
+    }
+
+    if (!filtered.length) {
+      grid.innerHTML = `
+        <div class="no-results">
+          Nessun prodotto trovato.
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(p => {
+
+      const title = escapeHtml(p.title || "Prodotto");
+      const code = escapeHtml(p.code || "");
+      const summary = escapeHtml(p.summary || "");
+      const categoryText = escapeHtml(p.category || "");
+      const typeText = escapeHtml(p.type || "");
+
+      const image = escapeHtml(p.image || p.full_image || "");
+      const fullImage = escapeHtml(p.full_image || p.image || "");
+
+      const price = euro(p.price);
+
+      const qty = p.qty
+        ? `<div class="product-qty">${escapeHtml(p.qty)}</div>`
+        : "";
+
+      const offer = p.offer
+        ? `<div class="product-offer">${escapeHtml(p.offer)}</div>`
+        : "";
+
+      const whatsappText = encodeURIComponent(
+        `Buongiorno, vorrei richiedere un preventivo per il prodotto ${p.code || ""} - ${p.title || ""}.`
+      );
+
+      return `
+        <article class="product-card">
+
+          <button
+            class="product-image-button"
+            type="button"
+            onclick="openProductImage('${fullImage}', '${title}')"
+            aria-label="Ingrandisci ${title}"
+          >
+            <img
+              src="${image}"
+              alt="${title}"
+              class="product-image"
+              loading="lazy"
+            >
+          </button>
+
+          <div class="product-card-body">
+
+            ${categoryText
+              ? `<div class="product-category">${categoryText}</div>`
+              : ""
+            }
+
+            <h3>${title}</h3>
+
+            ${code
+              ? `<div class="product-code">Codice: <strong>${code}</strong></div>`
+              : ""
+            }
+
+            ${summary
+              ? `<p class="product-summary">${summary}</p>`
+              : ""
+            }
+
+            ${typeText
+              ? `<div class="product-type">${typeText}</div>`
+              : ""
+            }
+
+            ${qty}
+
+            ${offer}
+
+            <div class="product-price">
+              ${price}
+              <small>IVA inclusa</small>
+            </div>
+
+            <a
+              class="btn btn-primary product-quote"
+              href="https://wa.me/393923910673?text=${whatsappText}"
+              target="_blank"
+              rel="noopener"
+            >
+              Richiedi preventivo
+            </a>
+
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  window.openProductImage = function(src, alt) {
+    const popup = document.getElementById("catalogPopup");
+    const popupImage = document.getElementById("catalogPopupImg");
+
+    if (!popup || !popupImage || !src) return;
+
+    popupImage.src = src;
+    popupImage.alt = alt || "Prodotto";
+    popup.classList.add("is-open");
+    popup.setAttribute("aria-hidden", "false");
+  };
+
+  populateFilters();
+
+  searchInput?.addEventListener("input", render);
+  categorySelect?.addEventListener("change", render);
+  typeSelect?.addEventListener("change", render);
+
+  render();
+
+});
+</script>
 <script>
 (()=>{const all=Array.isArray(window.CICCIO_CATALOGO)?window.CICCIO_CATALOGO:[];const products=all.filter(p=>p&&p.price&&p.title&&p.image);
 const grid=document.getElementById('catalogGrid'),search=document.getElementById('catalogSearch'),category=document.getElementById('catalogCategory'),count=document.getElementById('catalogCount'),empty=document.getElementById('catalogEmpty');
