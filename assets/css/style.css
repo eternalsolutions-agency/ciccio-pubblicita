@@ -706,3 +706,11 @@ button{font:inherit}
 /* Social: footer nascosto, icone header uniformate */
 .footer-social{display:none!important;}
 .header-social a:first-child img{transform:scale(1.18);}
+
+/* Footer: dati aziendali subito sotto la descrizione */
+.footer .footer-copyright-inline{
+  margin-top:22px;
+  font-size:.78rem;
+  line-height:1.5;
+  color:#777;
+}
