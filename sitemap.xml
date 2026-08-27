@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://cicciopubblicita.com/</loc></url>
-  <url><loc>https://cicciopubblicita.com/chi-siamo.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/servizi.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/promozioni.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/contatti.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/privacy.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/cookie.html</loc></url>
   <url><loc>https://cicciopubblicita.com/en/</loc></url>
-  <url><loc>https://cicciopubblicita.com/en/about.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/en/services.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/en/promotions.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/en/contact.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/en/privacy.html</loc></url>
-  <url><loc>https://cicciopubblicita.com/en/cookie.html</loc></url>
   <url><loc>https://cicciopubblicita.com/de/</loc></url>
+  <url><loc>https://cicciopubblicita.com/chi-siamo.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/en/about.html</loc></url>
   <url><loc>https://cicciopubblicita.com/de/ueber-uns.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/servizi.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/en/services.html</loc></url>
   <url><loc>https://cicciopubblicita.com/de/leistungen.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/catalogo.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/en/catalogue.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/de/katalog.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/promozioni.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/en/promotions.html</loc></url>
   <url><loc>https://cicciopubblicita.com/de/aktionen.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/contatti.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/en/contact.html</loc></url>
   <url><loc>https://cicciopubblicita.com/de/kontakt.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/privacy.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/en/privacy.html</loc></url>
   <url><loc>https://cicciopubblicita.com/de/privacy.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/cookie.html</loc></url>
+  <url><loc>https://cicciopubblicita.com/en/cookie.html</loc></url>
   <url><loc>https://cicciopubblicita.com/de/cookie.html</loc></url>
 </urlset>
