@@ -6,7 +6,6 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <title>Kontakt | Ciccio Pubblicità</title>
 <meta content="Kontaktieren Sie Ciccio Pubblicità für Angebote zu personalisierter Bekleidung und Werbeartikeln." name="description"/>
-
 <link href="/assets/css/style.css" rel="stylesheet"/>
 <meta content="website" property="og:type"/>
 <meta content="Kontakt | Ciccio Pubblicità" property="og:title"/>
@@ -29,36 +28,61 @@
 </div>
 </div>
 </header>
-<main><section class="page-hero"><div class="container"><div class="breadcrumbs">Home / Kontakt</div><h1>Erzählen Sie uns von Ihrem Projekt</h1><p>Kontaktieren Sie uns direkt telefonisch oder über WhatsApp.</p></div></section><section class="section"><div class="container contact-grid"><div><div class="section-heading"><span class="section-label">Kontakt</span><h2>Ciccio Pubblicità</h2><p>Sitz in Termini Imerese (PA), Sizilien.</p></div><div class="contact-box"><div class="contact-row"><strong>Telefon</strong><a href="tel:+393518392570">351 839 2570</a></div><div class="contact-row"><strong>WhatsApp</strong><a href="https://wa.me/393518392570" rel="noopener" target="_blank">Chat öffnen</a></div><div class="contact-row"><strong>Adresse</strong><span>Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA), Italien</span></div><div class="contact-row"><strong>USt-IdNr.</strong><span>07104960823</span></div><div class="contact-row"><strong>Steuernummer</strong><span>CLMFNC72P11L112X</span></div></div></div>
+<main><section class="page-hero contact-page-hero"><div class="container contact-hero-grid"><div><div class="breadcrumbs">Startseite / Kontakt</div><h1>Sprechen wir über Ihr Projekt</h1><p>Für Informationen oder ein Angebot kontaktieren Sie uns direkt per Telefon oder WhatsApp.</p></div><div class="contact-hero-photo"><img alt="Articoli promozionali personalizzabili" src="/assets/images/editorial-penne.jpg"/></div></div></section>
+<section class="section"><div class="container contact-grid"><div><div class="section-heading"><span class="section-label">Kontakt</span><h2>Ciccio Pubblicità</h2><p>Wir sind in Termini Imerese auf Sizilien und spezialisiert auf Personalisierung, Bekleidung, Werbeartikel und Promotionsprodukte.</p></div>
+<div class="contact-box"><div class="contact-row"><strong>Telefon</strong><a href="tel:+393518392570">351 839 2570</a></div><div class="contact-row"><strong>WhatsApp</strong><a href="https://wa.me/393518392570" rel="noopener" target="_blank">Chat öffnen</a></div><div class="contact-row"><strong>Adresse</strong><span>Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA)</span></div><div class="contact-row"><strong>P. IVA</strong><span>07104960823</span></div><div class="contact-row"><strong>Steuernummer</strong><span>CLMFNC72P11L112X</span></div></div></div>
 <div class="contact-cta">
 <span class="section-label">Informationsanfrage</span>
 <h2>Informationsanfrage</h2>
-<form class="contact-form" onsubmit="return sendContactEmail(event)">
+<form class="contact-form" id="contactForm">
 <div><label for="cf-name">Vor- und Nachname</label><input id="cf-name" name="name" required=""/></div>
 <div><label for="cf-phone">Telefon</label><input id="cf-phone" name="phone"/></div>
 <div><label for="cf-subject">Betreff</label><input id="cf-subject" name="subject" required=""/></div>
 <div><label for="cf-message">Nachricht</label><textarea id="cf-message" name="message" required=""></textarea></div>
+<label class="privacy-check" style="display:flex;gap:10px;align-items:flex-start;font-size:14px">
+<input name="privacy_acceptance" required="" style="margin-top:4px" type="checkbox" value="Accettata"/>
+<span>Ich habe die <a data-legal-popup="privacy" href="/de/privacy.html">Privacy Policy</a> gelesen und stimme der Verarbeitung meiner Daten zur Beantwortung meiner Anfrage zu.</span>
+</label>
+<input autocomplete="off" name="_honey" style="display:none" tabindex="-1" type="text"/>
 <button class="btn btn-primary" type="submit">Anfrage senden</button>
-<p class="form-note">Beim Absenden öffnet sich Ihr E-Mail-Programm mit einer vorbereiteten Nachricht.</p>
+<p class="form-note" id="formStatus">Ihre Anfrage wird direkt an Ciccio Pubblicità gesendet.</p>
 </form>
 </div>
 <script>
-function sendContactEmail(event){
+document.getElementById('contactForm').addEventListener('submit', async function(event){
   event.preventDefault();
-  const f=event.currentTarget;
-  const to='pubblicita'+'.'+'calamaio'+'@'+'gmail.com';
-  const body = 'Vor- und Nachname: '+f.name.value+'
-Telefon: '+f.phone.value+'
-Betreff: '+f.subject.value+'
+  const form = event.currentTarget;
+  const button = form.querySelector('button[type="submit"]');
+  const status = document.getElementById('formStatus');
+  button.disabled = true;
+  button.textContent = 'Invio in corso...';
+  status.textContent = 'Invio della richiesta...';
 
-Nachricht:
-'+f.message.value;
-  window.location.href='mailto:'+to+'?subject='+encodeURIComponent('Informationsanfrage über die Website Ciccio Pubblicità: '+f.subject.value)+'&body='+encodeURIComponent(body);
-  return false;
-}
+  const data = new FormData(form);
+  data.append('_subject', 'Nuova richiesta dal sito Ciccio Pubblicità - ' + form.subject.value);
+  data.append('_template', 'table');
+  data.append('_captcha', 'false');
+
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/pubblicitacalamaio@gmail.com', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    });
+    const result = await response.json();
+    if (!response.ok || result.success === 'false' || result.success === false) throw new Error('Invio non riuscito');
+    form.reset();
+    status.textContent = 'Richiesta inviata correttamente. Ti risponderemo il prima possibile.';
+  } catch (err) {
+    status.textContent = 'Non è stato possibile inviare la richiesta. Puoi contattarci tramite WhatsApp o email.';
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Invia richiesta';
+  }
+});
 </script>
-</div></section><section class="section soft"><div class="container"><div class="section-heading"><span class="section-label">Wo wir sind</span><h2>Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA), Italien</h2></div><div class="map-wrap"><div class="map-consent" style="min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px;text-align:center;background:#151515;color:#fff;border-radius:18px">
-<p style="max-width:620px;margin:0;color:#ddd">Die Karte ist ein externer Google-Inhalt und wird erst auf Ihre Anfrage geladen.</p>
+</div></section><section class="section soft"><div class="container"><div class="section-heading"><span class="section-label">Wo wir sind</span></div><div class="map-wrap"><div class="map-consent" style="min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:30px;text-align:center;background:#151515;color:#fff;border-radius:18px">
+<p style="max-width:620px;margin:0;color:#ddd">Die Karte ist ein externer Inhalt von Google und wird nur auf Ihre Anfrage geladen.</p>
 <button onclick="this.parentElement.innerHTML='&lt;iframe src=&quot;https://www.google.com/maps?q=Via+Emanuela+Setti+Carraro+31%2C+90018+Termini+Imerese+PA&amp;output=embed&quot; loading=&quot;lazy&quot; referrerpolicy=&quot;no-referrer-when-downgrade&quot; title=&quot;Google Maps&quot; style=&quot;width:100%;height:420px;border:0;border-radius:18px&quot;&gt;&lt;/iframe&gt;'" style="border:0;border-radius:999px;padding:13px 22px;background:#25d366;color:#07150c;font-weight:800;cursor:pointer" type="button">Google Maps anzeigen</button>
 </div></div></div></section></main>
 <footer class="footer">
