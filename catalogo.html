@@ -1,53 +1,54 @@
-<!doctype html>
-<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Catalogo | Ciccio Pubblicità</title><meta name="description" content="Catalogo prodotti personalizzabili Ciccio Pubblicità. Prezzi IVA inclusa e spedizione gratuita da 150 euro.">
-<link rel="stylesheet" href="/assets/css/style.css"><link rel="icon" href="/assets/images/logo-ciccio-pubblicita.png">
+<!DOCTYPE html>
+
+<html lang="it"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Catalogo | Ciccio Pubblicità</title><meta content="Catalogo prodotti personalizzabili Ciccio Pubblicità. Prezzi IVA inclusa e spedizione gratuita da 150 euro." name="description"/>
+<link href="/assets/css/style.css" rel="stylesheet"/><link href="/assets/images/logo-ciccio-pubblicita.png" rel="icon"/>
 <style>
 .catalog-section{padding:38px 0 70px}.catalog-notice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 22px;padding:18px;background:#111;border:1px solid rgba(255,255,255,.08);border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.12)}.catalog-notice span{display:flex;align-items:center;justify-content:center;min-height:54px;background:#1b1b1b;border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:12px 14px;font-weight:800;color:#f5f5f5;text-align:center}.catalog-notice span::first-letter{color:#25D366}
 .catalog-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,320px);gap:12px;margin:18px 0 14px}.catalog-toolbar input,.catalog-toolbar select{width:100%;min-height:50px;border:1px solid #d8d8d8;border-radius:12px;padding:0 15px;background:#fff;font:inherit}.catalog-count{margin:0 0 18px;color:#666}
 .catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.catalog-card{background:#fff;border:1px solid #e8e8e8;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);display:flex;flex-direction:column}.catalog-image-open{border:0;background:#fff;padding:0;cursor:zoom-in;aspect-ratio:4/3;overflow:hidden}.catalog-image-open img{width:100%;height:100%;object-fit:contain;display:block;background:#fff}.catalog-card-body{padding:20px;display:flex;flex-direction:column;flex:1}.catalog-card .badge{align-self:flex-start}.catalog-card h3{margin:10px 0 8px}.catalog-code{font-size:.88rem;font-weight:800;margin:0 0 8px}.catalog-summary{color:#555;line-height:1.45;margin:0 0 8px}.catalog-offer{font-size:.88rem;font-weight:700;margin:0 0 14px}.catalog-card .price{margin-top:auto;margin-bottom:14px}.catalog-card .price small{display:block}.catalog-card .catalog-wa{display:flex;width:100%;justify-content:center;background:#25D366!important;color:#fff!important;border-color:#25D366!important}.catalog-empty{text-align:center;padding:45px 15px;color:#666}.catalog-download{margin-top:18px}
 .catalog-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;padding:22px;z-index:99999}.catalog-lightbox.open{display:flex}.catalog-lightbox img{max-width:96vw;max-height:92vh;object-fit:contain;background:#fff}.catalog-lightbox-close{position:absolute;top:14px;right:18px;border:0;background:#fff;width:42px;height:42px;border-radius:50%;font-size:28px;cursor:pointer;z-index:2}.catalog-lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:58px;border:0;border-radius:14px;background:rgba(255,255,255,.92);font-size:34px;cursor:pointer;z-index:2}.catalog-lightbox-prev{left:18px}.catalog-lightbox-next{right:18px}.catalog-lightbox-counter{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.65);color:#fff;padding:7px 12px;border-radius:999px;font-weight:800}.catalog-lightbox-nav[hidden],.catalog-lightbox-counter[hidden]{display:none}@media(max-width:620px){.catalog-lightbox-nav{width:42px;height:50px}.catalog-lightbox-prev{left:8px}.catalog-lightbox-next{right:8px}}
 @media(max-width:900px){.catalog-notice{grid-template-columns:1fr}.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:620px){.catalog-toolbar{grid-template-columns:1fr}.catalog-grid{grid-template-columns:1fr}}
-</style></head><body>
+</style><link href="https://cicciopubblicita.com/catalogo.html" rel="canonical"/><link href="https://cicciopubblicita.com/catalogo.html" hreflang="it" rel="alternate"/><link href="https://cicciopubblicita.com/en/catalogue.html" hreflang="en" rel="alternate"/><link href="https://cicciopubblicita.com/de/katalog.html" hreflang="de" rel="alternate"/><link href="https://cicciopubblicita.com/catalogo.html" hreflang="x-default" rel="alternate"/></head><body>
 <header class="header">
-  <div class="container nav-container">
-    <a class="brand" href="/" aria-label="Ciccio Pubblicità">
-      <img class="brand-logo" src="/assets/images/logo-ciccio-pubblicita.png" alt="Ciccio Pubblicità - Pubblicità & Gadget">
-    </a>
-    <button class="menu-toggle" aria-expanded="false" aria-label="Menu">☰</button>
-    <nav class="navigation"><a href="/" class="">Home</a><a href="/chi-siamo.html" class="">Chi siamo</a><a href="/servizi.html" class="">Servizi</a><a href="/catalogo.html" class="active">Catalogo</a><a href="/promozioni.html" class="">Promozioni</a><a href="/contatti.html" class="">Contatti</a></nav>
-    <div class="header-social" aria-label="Social"><a href="https://www.facebook.com/share/199Km23NHG/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><img src="/assets/images/facebook-logo.webp" alt="Facebook"></a><a href="https://www.instagram.com/cicciopubblicita?igsi=cDIydXEzZHY2bHA4" target="_blank" rel="noopener" aria-label="Instagram"><img src="/assets/images/instagram-logo.png" alt="Instagram"></a></div>
-    <div class="languages">
-      <a href="/" class="active">IT</a>
-      <a href="/en/" class="">EN</a>
-      <a href="/de/" class="">DE</a>
-    </div>
-  </div>
+<div class="container nav-container">
+<a aria-label="Ciccio Pubblicità" class="brand" href="/">
+<img alt="Ciccio Pubblicità - Pubblicità &amp; Gadget" class="brand-logo" src="/assets/images/logo-ciccio-pubblicita.png"/>
+</a>
+<button aria-expanded="false" aria-label="Menu" class="menu-toggle">☰</button>
+<nav class="navigation"><a class="" href="/">Home</a><a class="" href="/chi-siamo.html">Chi siamo</a><a class="" href="/servizi.html">Servizi</a><a class="active" href="/catalogo.html">Catalogo</a><a class="" href="/promozioni.html">Promozioni</a><a class="" href="/contatti.html">Contatti</a></nav>
+<div aria-label="Social" class="header-social"><a aria-label="Facebook" href="https://www.facebook.com/share/199Km23NHG/?mibextid=wwXIfr" rel="noopener" target="_blank"><img alt="Facebook" src="/assets/images/facebook-logo.webp"/></a><a aria-label="Instagram" href="https://www.instagram.com/cicciopubblicita?igsi=cDIydXEzZHY2bHA4" rel="noopener" target="_blank"><img alt="Instagram" src="/assets/images/instagram-logo.png"/></a></div>
+<div class="languages">
+<a class="active" href="/">IT</a>
+<a class="" href="/en/">EN</a>
+<a class="" href="/de/">DE</a>
+</div>
+</div>
 </header>
-<main><section class="page-hero"><div class="container"><div class="breadcrumbs">Home / Catalogo</div><h1>Catalogo prodotti personalizzabili</h1><p>Scopri articoli promozionali, abbigliamento e gadget personalizzabili per aziende, eventi, associazioni e privati.</p><div class="catalog-download"><a class="btn btn-primary" href="/Catalogo-Ciccio-Pubblicita-2026.pdf" download>Scarica catalogo PDF</a></div></div></section>
-<section class="catalog-section"><div class="container"><div class="catalog-notice"><span>✓ Prezzi IVA inclusa</span><span>✓ Spedizione gratuita da 150 €</span><span>✓ Preventivo diretto su WhatsApp</span></div><div class="catalog-toolbar"><input id="catalogSearch" type="search" placeholder="Cerca prodotto, codice o parola chiave…"><select id="catalogCategory"><option value="all">Tutte le categorie</option></select></div><p id="catalogCount" class="catalog-count"></p><div id="catalogGrid" class="catalog-grid"></div><div id="catalogEmpty" class="catalog-empty" hidden>Nessun prodotto trovato.</div></div></section></main>
-<div class="catalog-lightbox" id="catalogLightbox" aria-hidden="true"><button class="catalog-lightbox-close" aria-label="Chiudi">×</button><button class="catalog-lightbox-nav catalog-lightbox-prev" aria-label="Foto precedente">‹</button><img id="catalogLightboxImg" alt=""><button class="catalog-lightbox-nav catalog-lightbox-next" aria-label="Foto successiva">›</button><div class="catalog-lightbox-counter"></div></div>
+<main><section class="page-hero"><div class="container"><div class="breadcrumbs">Home / Catalogo</div><h1>Catalogo prodotti personalizzabili</h1><p>Scopri articoli promozionali, abbigliamento e gadget personalizzabili per aziende, eventi, associazioni e privati.</p><div class="catalog-download"><a class="btn btn-primary" download="" href="/Catalogo-Ciccio-Pubblicita-2026.pdf">Scarica catalogo PDF</a></div></div></section>
+<section class="catalog-section"><div class="container"><div class="catalog-notice"><span>✓ Prezzi IVA inclusa</span><span>✓ Spedizione gratuita da 150 €</span><span>✓ Preventivo diretto su WhatsApp</span></div><div class="catalog-toolbar"><input id="catalogSearch" placeholder="Cerca prodotto, codice o parola chiave…" type="search"/><select id="catalogCategory"><option value="all">Tutte le categorie</option></select></div><p class="catalog-count" id="catalogCount"></p><div class="catalog-grid" id="catalogGrid"></div><div class="catalog-empty" hidden="" id="catalogEmpty">Nessun prodotto trovato.</div></div></section></main>
+<div aria-hidden="true" class="catalog-lightbox" id="catalogLightbox"><button aria-label="Chiudi" class="catalog-lightbox-close">×</button><button aria-label="Foto precedente" class="catalog-lightbox-nav catalog-lightbox-prev">‹</button><img alt="" id="catalogLightboxImg"/><button aria-label="Foto successiva" class="catalog-lightbox-nav catalog-lightbox-next">›</button><div class="catalog-lightbox-counter"></div></div>
 <footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <img class="footer-logo" src="/assets/images/logo-ciccio-pubblicita.png" alt="Ciccio Pubblicità">
-      <p>Personalizzazione di abbigliamento, accessori e articoli promozionali.</p>
-    </div>
-    <div><h4>Esplora</h4><a href="/chi-siamo.html">Chi siamo</a><a href="/servizi.html">Servizi</a><a href="/catalogo.html">Catalogo</a><a href="/promozioni.html">Promozioni</a><a href="/contatti.html">Contatti</a></div>
-    <div>
-      <h4>Contatti</h4>
-      <p class="footer-address">Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA)</p>
-      <a href="tel:+393518392570">351 839 2570</a>
-      <a href="https://wa.me/393518392570" target="_blank" rel="noopener">WhatsApp</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/cookie.html">Cookie</a>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>© 2026 CiccioPubblicita di Francesco Calamaio — P. IVA 07104960823 — C.F. CLMFNC72P11L112X</p>
-  </div>
-<div class="footer-social"><span>Seguici sui social</span><div><a href="https://www.facebook.com/share/199Km23NHG/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><img src="/assets/images/facebook-logo.webp" alt="Facebook"></a><a href="https://www.instagram.com/cicciopubblicita?igsi=cDIydXEzZHY2bHA4" target="_blank" rel="noopener" aria-label="Instagram"><img src="/assets/images/instagram-logo.png" alt="Instagram"></a></div></div>
-</footer><a class="whatsapp-floating" href="https://wa.me/393518392570?text=Ciao%20Ciccio%20Pubblicit%C3%A0%2C%20vorrei%20ricevere%20un%20preventivo." target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19.11 17.56c-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.59.13-.17.26-.68.84-.83 1.01-.15.17-.31.19-.57.06-.26-.13-1.1-.4-2.09-1.29-.77-.69-1.29-1.54-1.44-1.8-.15-.26-.02-.4.11-.53.12-.12.26-.31.39-.46.13-.15.17-.26.26-.44.09-.17.04-.33-.02-.46-.06-.13-.59-1.42-.81-1.94-.21-.51-.43-.44-.59-.45h-.5c-.17 0-.46.07-.7.33-.24.26-.92.9-.92 2.2s.94 2.55 1.07 2.73c.13.17 1.85 2.83 4.49 3.97.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.08 1.53-.63 1.75-1.23.22-.61.22-1.12.15-1.23-.06-.11-.24-.17-.5-.3z"/><path d="M16.02 3.2c-7.05 0-12.78 5.73-12.78 12.78 0 2.25.59 4.46 1.71 6.4L3.14 29l6.79-1.78a12.73 12.73 0 0 0 6.08 1.55h.01c7.05 0 12.78-5.73 12.78-12.78S23.07 3.2 16.02 3.2zm0 23.41h-.01a10.57 10.57 0 0 1-5.39-1.47l-.39-.23-4.03 1.06 1.08-3.93-.25-.4a10.58 10.58 0 1 1 8.99 4.97z"/></svg><span>Richiedi un preventivo</span></a>
+<div class="container footer-grid">
+<div>
+<img alt="Ciccio Pubblicità" class="footer-logo" src="/assets/images/logo-ciccio-pubblicita.png"/>
+<p>Personalizzazione di abbigliamento, accessori e articoli promozionali.</p>
+</div>
+<div><h4>Esplora</h4><a href="/chi-siamo.html">Chi siamo</a><a href="/servizi.html">Servizi</a><a href="/catalogo.html">Catalogo</a><a href="/promozioni.html">Promozioni</a><a href="/contatti.html">Contatti</a></div>
+<div>
+<h4>Contatti</h4>
+<p class="footer-address">Via Emanuela Setti Carraro 31, 90018 Termini Imerese (PA)</p>
+<a href="tel:+393518392570">351 839 2570</a>
+<a href="https://wa.me/393518392570" rel="noopener" target="_blank">WhatsApp</a>
+<a href="/privacy.html">Privacy</a>
+<a href="/cookie.html">Cookie</a>
+</div>
+</div>
+<div class="container footer-bottom">
+<p>© 2026 CiccioPubblicita di Francesco Calamaio — P. IVA 07104960823 — C.F. CLMFNC72P11L112X</p>
+</div>
+<div class="footer-social"><span>Seguici sui social</span><div><a aria-label="Facebook" href="https://www.facebook.com/share/199Km23NHG/?mibextid=wwXIfr" rel="noopener" target="_blank"><img alt="Facebook" src="/assets/images/facebook-logo.webp"/></a><a aria-label="Instagram" href="https://www.instagram.com/cicciopubblicita?igsi=cDIydXEzZHY2bHA4" rel="noopener" target="_blank"><img alt="Instagram" src="/assets/images/instagram-logo.png"/></a></div></div>
+</footer><a aria-label="WhatsApp" class="whatsapp-floating" href="https://wa.me/393518392570?text=Ciao%20Ciccio%20Pubblicit%C3%A0%2C%20vorrei%20ricevere%20un%20preventivo." rel="noopener" target="_blank"><svg aria-hidden="true" viewbox="0 0 32 32"><path d="M19.11 17.56c-.26-.13-1.53-.75-1.77-.84-.24-.09-.41-.13-.59.13-.17.26-.68.84-.83 1.01-.15.17-.31.19-.57.06-.26-.13-1.1-.4-2.09-1.29-.77-.69-1.29-1.54-1.44-1.8-.15-.26-.02-.4.11-.53.12-.12.26-.31.39-.46.13-.15.17-.26.26-.44.09-.17.04-.33-.02-.46-.06-.13-.59-1.42-.81-1.94-.21-.51-.43-.44-.59-.45h-.5c-.17 0-.46.07-.7.33-.24.26-.92.9-.92 2.2s.94 2.55 1.07 2.73c.13.17 1.85 2.83 4.49 3.97.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.08 1.53-.63 1.75-1.23.22-.61.22-1.12.15-1.23-.06-.11-.24-.17-.5-.3z"></path><path d="M16.02 3.2c-7.05 0-12.78 5.73-12.78 12.78 0 2.25.59 4.46 1.71 6.4L3.14 29l6.79-1.78a12.73 12.73 0 0 0 6.08 1.55h.01c7.05 0 12.78-5.73 12.78-12.78S23.07 3.2 16.02 3.2zm0 23.41h-.01a10.57 10.57 0 0 1-5.39-1.47l-.39-.23-4.03 1.06 1.08-3.93-.25-.4a10.58 10.58 0 1 1 8.99 4.97z"></path></svg><span>Richiedi un preventivo</span></a>
 <script src="/assets/js/main.js"></script><script src="/catalogo-data.js"></script>
 <script>
 (()=>{const all=Array.isArray(window.CICCIO_CATALOGO)?window.CICCIO_CATALOGO:[];const products=all.filter(p=>p&&p.price&&p.title&&p.image);
