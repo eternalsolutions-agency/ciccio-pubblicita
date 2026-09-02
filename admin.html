@@ -857,22 +857,30 @@ async function uploadProductImages(files) {
 
         let imageUrl = existingImageUrl;
 
-        if (imageFile) {
-          if (imageFile.type !== "image/jpeg") {
-            throw new Error("Per ora carica una foto in formato JPG/JPEG.");
-          }
+let currentImages = [];
 
-          if (imageFile.size > 5 * 1024 * 1024) {
-            throw new Error("La foto supera il limite massimo di 5 MB.");
-          }
+if (editingProductId) {
+  const currentProduct = productsCache.find(function(item) {
+    return item.id === editingProductId;
+  });
 
-          const oldImageUrl = existingImageUrl;
-          imageUrl = await uploadProductImage(imageFile);
+  if (currentProduct && Array.isArray(currentProduct.images)) {
+    currentImages = [...currentProduct.images];
+  } else if (existingImageUrl) {
+    currentImages = [existingImageUrl];
+  }
+}
 
-          if (editingProductId && oldImageUrl) {
-            await removeStorageImage(oldImageUrl);
-          }
-        }
+if (imageFiles.length > 0) {
+
+  const newImageUrls = await uploadProductImages(imageFiles);
+
+  currentImages = currentImages.concat(newImageUrls);
+
+  if (!imageUrl && newImageUrls.length > 0) {
+    imageUrl = newImageUrls[0];
+  }
+}
 
         const productData = {
           name: name,
@@ -884,6 +892,7 @@ async function uploadProductImages(files) {
           page: page || null,
           offer_text: offerText || null,
           image_url: imageUrl || null,
+          images: currentImages,
           active: active,
           sort_order:
             sortOrderValue !== "" ? parseInt(sortOrderValue, 10) : 0,
