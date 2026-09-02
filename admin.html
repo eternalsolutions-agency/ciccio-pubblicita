@@ -53,8 +53,7 @@
     }
 
     input,
-    textarea,
-    select {
+    textarea {
       width: 100%;
       padding: 12px 14px;
       margin-bottom: 18px;
@@ -72,10 +71,10 @@
     button {
       border: 0;
       border-radius: 9px;
-      padding: 13px 18px;
+      padding: 12px 16px;
       background: #111;
       color: #fff;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
     }
@@ -116,9 +115,7 @@
       gap: 20px;
     }
 
-    .dashboard-header {
-      margin-bottom: 30px;
-    }
+    .dashboard-header { margin-bottom: 30px; }
 
     .dashboard-header h1 {
       margin: 0 0 5px;
@@ -153,8 +150,7 @@
     }
 
     .product-form-box h2 {
-      margin-top: 0;
-      margin-bottom: 25px;
+      margin: 0 0 25px;
     }
 
     .form-grid {
@@ -163,9 +159,7 @@
       gap: 0 20px;
     }
 
-    .full {
-      grid-column: 1 / -1;
-    }
+    .full { grid-column: 1 / -1; }
 
     .checkbox-row {
       display: flex;
@@ -179,9 +173,7 @@
       margin: 0;
     }
 
-    .checkbox-row label {
-      margin: 0;
-    }
+    .checkbox-row label { margin: 0; }
 
     .form-actions {
       display: flex;
@@ -215,24 +207,32 @@
     }
 
     .product-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
       align-items: center;
-      gap: 16px;
-      padding: 16px 5px;
+      gap: 18px;
+      padding: 18px 5px;
       border-bottom: 1px solid #eee;
     }
 
-    .product-row:last-child {
-      border-bottom: 0;
-    }
+    .product-row:last-child { border-bottom: 0; }
 
-    .product-thumb {
-      width: 70px;
-      height: 70px;
+    .product-thumb,
+    .product-thumb-placeholder {
+      width: 80px;
+      height: 80px;
       border-radius: 10px;
       object-fit: cover;
       background: #eee;
-      flex: 0 0 70px;
+    }
+
+    .product-thumb-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #888;
+      text-align: center;
     }
 
     .product-info strong {
@@ -249,15 +249,36 @@
 
     .hidden-label {
       display: inline-block !important;
-      margin-top: 5px;
-      padding: 3px 7px;
+      width: fit-content;
+      margin-top: 6px;
+      padding: 4px 7px;
       background: #eee;
+      color: #555 !important;
       border-radius: 5px;
       font-size: 11px !important;
       font-weight: 700;
     }
 
-    @media (max-width: 700px) {
+    .product-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 7px;
+    }
+
+    .edit-button {
+      background: #111;
+    }
+
+    .toggle-button {
+      background: #555;
+    }
+
+    .delete-button {
+      background: #b42318;
+    }
+
+    @media (max-width: 760px) {
       .dashboard-header,
       .toolbar,
       .form-actions {
@@ -269,8 +290,25 @@
         grid-template-columns: 1fr;
       }
 
-      .full {
-        grid-column: auto;
+      .full { grid-column: auto; }
+
+      .product-row {
+        grid-template-columns: 70px 1fr;
+      }
+
+      .product-thumb,
+      .product-thumb-placeholder {
+        width: 70px;
+        height: 70px;
+      }
+
+      .product-actions {
+        grid-column: 1 / -1;
+        justify-content: stretch;
+      }
+
+      .product-actions button {
+        flex: 1;
       }
 
       .dashboard-header button,
@@ -286,14 +324,12 @@
 
   <div id="loginSection" class="login-wrapper">
     <div class="login-card">
-
       <div class="brand">
         <h1>Ciccio Pubblicità</h1>
         <p>Gestione Catalogo</p>
       </div>
 
       <form id="loginForm">
-
         <label for="email">Email</label>
         <input type="email" id="email" autocomplete="username" required>
 
@@ -309,7 +345,6 @@
     </div>
   </div>
 
-
   <main id="dashboard">
 
     <div class="dashboard-header">
@@ -321,10 +356,9 @@
       <button id="logoutButton" class="logout-button">ESCI</button>
     </div>
 
-
     <div id="productFormBox" class="product-form-box">
 
-      <h2>Aggiungi prodotto</h2>
+      <h2 id="formTitle">Aggiungi prodotto</h2>
 
       <div id="formStatus" class="form-status"></div>
 
@@ -349,68 +383,37 @@
 
           <div>
             <label for="productPrice">Prezzo (€)</label>
-            <input
-              type="number"
-              id="productPrice"
-              min="0"
-              step="0.01"
-              placeholder="Es. 149.00"
-            >
+            <input type="number" id="productPrice" min="0" step="0.01">
           </div>
 
           <div>
             <label for="productQuantity">Quantità / minimo ordine</label>
-            <input
-              type="text"
-              id="productQuantity"
-              placeholder="Es. 100 pezzi"
-            >
+            <input type="text" id="productQuantity" placeholder="Es. 100 pezzi">
           </div>
 
           <div>
             <label for="productCategory">Categoria</label>
-            <input
-              type="text"
-              id="productCategory"
-              placeholder="Es. Abbigliamento"
-            >
+            <input type="text" id="productCategory">
           </div>
 
           <div>
             <label for="productPage">Pagina catalogo</label>
-            <input
-              type="text"
-              id="productPage"
-              placeholder="Es. 74"
-            >
+            <input type="text" id="productPage">
           </div>
 
           <div class="full">
             <label for="productOffer">Testo offerta</label>
-            <input
-              type="text"
-              id="productOffer"
-              placeholder="Es. 100 pezzi € 149"
-            >
+            <input type="text" id="productOffer">
           </div>
 
           <div>
             <label for="productOrder">Ordine visualizzazione</label>
-            <input
-              type="number"
-              id="productOrder"
-              value="0"
-              step="1"
-            >
+            <input type="number" id="productOrder" value="0" step="1">
           </div>
 
           <div>
             <label for="productImage">Foto prodotto</label>
-            <input
-              type="file"
-              id="productImage"
-              accept="image/jpeg"
-            >
+            <input type="file" id="productImage" accept="image/jpeg">
           </div>
 
           <div class="full checkbox-row">
@@ -433,7 +436,6 @@
       </form>
     </div>
 
-
     <div class="toolbar">
       <div>
         <strong>Prodotti</strong>
@@ -444,7 +446,6 @@
       </button>
     </div>
 
-
     <div class="products-box">
       <div id="productsList">
         <div class="empty-state">Caricamento prodotti...</div>
@@ -452,7 +453,6 @@
     </div>
 
   </main>
-
 
   <script src="supabase-config.js"></script>
 
@@ -462,41 +462,40 @@
       SUPABASE_PUBLISHABLE_KEY
     );
 
+    let productsCache = [];
+    let editingProductId = null;
+    let existingImageUrl = null;
+
     const loginSection = document.getElementById("loginSection");
     const dashboard = document.getElementById("dashboard");
-
     const loginForm = document.getElementById("loginForm");
     const loginButton = document.getElementById("loginButton");
     const logoutButton = document.getElementById("logoutButton");
     const message = document.getElementById("message");
 
     const productsList = document.getElementById("productsList");
-
     const addProductButton = document.getElementById("addProductButton");
     const productFormBox = document.getElementById("productFormBox");
     const productForm = document.getElementById("productForm");
     const cancelProductButton = document.getElementById("cancelProductButton");
     const saveProductButton = document.getElementById("saveProductButton");
     const formStatus = document.getElementById("formStatus");
-
+    const formTitle = document.getElementById("formTitle");
 
     function showMessage(text, type) {
       message.textContent = text;
       message.className = type;
     }
 
-
     function showFormStatus(text, type) {
       formStatus.textContent = text;
       formStatus.className = "form-status " + type;
     }
 
-
     function clearFormStatus() {
       formStatus.textContent = "";
       formStatus.className = "form-status";
     }
-
 
     function showDashboard() {
       loginSection.style.display = "none";
@@ -504,38 +503,59 @@
       loadProducts();
     }
 
-
     function showLogin() {
       dashboard.style.display = "none";
       loginSection.style.display = "flex";
     }
 
-
-    function openProductForm() {
-      clearFormStatus();
+    function resetProductForm() {
       productForm.reset();
-
+      editingProductId = null;
+      existingImageUrl = null;
+      formTitle.textContent = "Aggiungi prodotto";
+      saveProductButton.textContent = "SALVA PRODOTTO";
       document.getElementById("productActive").checked = true;
       document.getElementById("productOrder").value = 0;
-
-      productFormBox.style.display = "block";
-
-      productFormBox.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+      clearFormStatus();
     }
 
+    function openNewProductForm() {
+      resetProductForm();
+      productFormBox.style.display = "block";
+      productFormBox.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 
     function closeProductForm() {
       productFormBox.style.display = "none";
-      productForm.reset();
-      clearFormStatus();
+      resetProductForm();
     }
 
+    function getStoragePathFromUrl(url) {
+      if (!url) return null;
+
+      const marker = "/storage/v1/object/public/product-images/";
+      const index = url.indexOf(marker);
+
+      if (index === -1) return null;
+
+      return decodeURIComponent(url.substring(index + marker.length));
+    }
+
+    async function removeStorageImage(imageUrl) {
+      const path = getStoragePathFromUrl(imageUrl);
+
+      if (!path) return;
+
+      const { error } = await supabaseClient.storage
+        .from("product-images")
+        .remove([path]);
+
+      if (error) {
+        console.warn("Impossibile eliminare la vecchia immagine:", error);
+      }
+    }
 
     async function loadProducts() {
-
       productsList.innerHTML =
         '<div class="empty-state">Caricamento prodotti...</div>';
 
@@ -547,24 +567,22 @@
 
       if (error) {
         console.error(error);
-
         productsList.innerHTML =
           '<div class="empty-state">Errore durante il caricamento dei prodotti.</div>';
-
         return;
       }
 
-      if (!data || data.length === 0) {
+      productsCache = data || [];
+
+      if (productsCache.length === 0) {
         productsList.innerHTML =
           '<div class="empty-state">Nessun prodotto presente.</div>';
-
         return;
       }
 
       productsList.innerHTML = "";
 
-      data.forEach(function(product) {
-
+      productsCache.forEach(function(product) {
         const row = document.createElement("div");
         row.className = "product-row";
 
@@ -574,6 +592,11 @@
           image.src = product.image_url;
           image.alt = product.name || "Prodotto";
           row.appendChild(image);
+        } else {
+          const placeholder = document.createElement("div");
+          placeholder.className = "product-thumb-placeholder";
+          placeholder.textContent = "Nessuna foto";
+          row.appendChild(placeholder);
         }
 
         const info = document.createElement("div");
@@ -583,12 +606,9 @@
         name.textContent = product.name || "Prodotto senza nome";
 
         const details = document.createElement("span");
-
         const detailsArray = [];
 
-        if (product.code) {
-          detailsArray.push("Cod. " + product.code);
-        }
+        if (product.code) detailsArray.push("Cod. " + product.code);
 
         if (product.price !== null && product.price !== undefined) {
           detailsArray.push(
@@ -600,18 +620,11 @@
           );
         }
 
-        if (product.quantity) {
-          detailsArray.push(product.quantity);
-        }
-
-        if (product.category) {
-          detailsArray.push(product.category);
-        }
+        if (product.quantity) detailsArray.push(product.quantity);
+        if (product.category) detailsArray.push(product.category);
 
         details.textContent =
-          detailsArray.length > 0
-            ? detailsArray.join(" · ")
-            : "Nessun dettaglio";
+          detailsArray.length ? detailsArray.join(" · ") : "Nessun dettaglio";
 
         info.appendChild(name);
         info.appendChild(details);
@@ -624,16 +637,134 @@
         }
 
         row.appendChild(info);
+
+        const actions = document.createElement("div");
+        actions.className = "product-actions";
+
+        const editButton = document.createElement("button");
+        editButton.className = "edit-button";
+        editButton.textContent = "MODIFICA";
+        editButton.addEventListener("click", function() {
+          editProduct(product.id);
+        });
+
+        const toggleButton = document.createElement("button");
+        toggleButton.className = "toggle-button";
+        toggleButton.textContent = product.active ? "NASCONDI" : "MOSTRA";
+        toggleButton.addEventListener("click", function() {
+          toggleProduct(product.id, product.active);
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-button";
+        deleteButton.textContent = "ELIMINA";
+        deleteButton.addEventListener("click", function() {
+          deleteProduct(product.id);
+        });
+
+        actions.appendChild(editButton);
+        actions.appendChild(toggleButton);
+        actions.appendChild(deleteButton);
+
+        row.appendChild(actions);
         productsList.appendChild(row);
       });
     }
 
+    function editProduct(id) {
+      const product = productsCache.find(function(item) {
+        return item.id === id;
+      });
+
+      if (!product) return;
+
+      editingProductId = product.id;
+      existingImageUrl = product.image_url || null;
+
+      formTitle.textContent = "Modifica prodotto";
+      saveProductButton.textContent = "SALVA MODIFICHE";
+
+      document.getElementById("productName").value = product.name || "";
+      document.getElementById("productCode").value = product.code || "";
+      document.getElementById("productDescription").value = product.description || "";
+      document.getElementById("productPrice").value =
+        product.price !== null && product.price !== undefined ? product.price : "";
+      document.getElementById("productQuantity").value = product.quantity || "";
+      document.getElementById("productCategory").value = product.category || "";
+      document.getElementById("productPage").value = product.page || "";
+      document.getElementById("productOffer").value = product.offer_text || "";
+      document.getElementById("productOrder").value = product.sort_order ?? 0;
+      document.getElementById("productActive").checked = product.active !== false;
+      document.getElementById("productImage").value = "";
+
+      clearFormStatus();
+      productFormBox.style.display = "block";
+      productFormBox.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function toggleProduct(id, currentState) {
+      const action = currentState ? "nascondere" : "mostrare";
+
+      if (!confirm("Vuoi davvero " + action + " questo prodotto?")) {
+        return;
+      }
+
+      const { error } = await supabaseClient
+        .from("products")
+        .update({
+          active: !currentState,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", id);
+
+      if (error) {
+        alert("Errore durante l'operazione.");
+        console.error(error);
+        return;
+      }
+
+      await loadProducts();
+    }
+
+    async function deleteProduct(id) {
+      const product = productsCache.find(function(item) {
+        return item.id === id;
+      });
+
+      if (!product) return;
+
+      const confirmed = confirm(
+        'Vuoi eliminare definitivamente "' +
+        (product.name || "questo prodotto") +
+        '"?\n\nQuesta operazione non può essere annullata.'
+      );
+
+      if (!confirmed) return;
+
+      const { error } = await supabaseClient
+        .from("products")
+        .delete()
+        .eq("id", id);
+
+      if (error) {
+        alert("Errore durante l'eliminazione.");
+        console.error(error);
+        return;
+      }
+
+      if (product.image_url) {
+        await removeStorageImage(product.image_url);
+      }
+
+      if (editingProductId === id) {
+        closeProductForm();
+      }
+
+      await loadProducts();
+    }
 
     async function uploadProductImage(file) {
-
-      if (!file) {
-        return null;
-      }
+      if (!file) return null;
 
       const extension = file.name.split(".").pop().toLowerCase();
 
@@ -644,29 +775,23 @@
         "." +
         extension;
 
-      const { error: uploadError } =
-        await supabaseClient.storage
-          .from("product-images")
-          .upload(safeFileName, file, {
-            cacheControl: "3600",
-            upsert: false
-          });
+      const { error: uploadError } = await supabaseClient.storage
+        .from("product-images")
+        .upload(safeFileName, file, {
+          cacheControl: "3600",
+          upsert: false
+        });
 
-      if (uploadError) {
-        throw uploadError;
-      }
+      if (uploadError) throw uploadError;
 
-      const { data } =
-        supabaseClient.storage
-          .from("product-images")
-          .getPublicUrl(safeFileName);
+      const { data } = supabaseClient.storage
+        .from("product-images")
+        .getPublicUrl(safeFileName);
 
       return data.publicUrl;
     }
 
-
     productForm.addEventListener("submit", async function(event) {
-
       event.preventDefault();
       clearFormStatus();
 
@@ -674,65 +799,45 @@
       saveProductButton.textContent = "SALVATAGGIO...";
 
       try {
-
-        const name =
-          document.getElementById("productName").value.trim();
-
-        const code =
-          document.getElementById("productCode").value.trim();
-
+        const name = document.getElementById("productName").value.trim();
+        const code = document.getElementById("productCode").value.trim();
         const description =
           document.getElementById("productDescription").value.trim();
-
-        const priceValue =
-          document.getElementById("productPrice").value;
-
+        const priceValue = document.getElementById("productPrice").value;
         const quantity =
           document.getElementById("productQuantity").value.trim();
-
         const category =
           document.getElementById("productCategory").value.trim();
-
-        const page =
-          document.getElementById("productPage").value.trim();
-
+        const page = document.getElementById("productPage").value.trim();
         const offerText =
           document.getElementById("productOffer").value.trim();
-
         const sortOrderValue =
           document.getElementById("productOrder").value;
-
-        const active =
-          document.getElementById("productActive").checked;
-
-        const imageFile =
-          document.getElementById("productImage").files[0];
-
+        const active = document.getElementById("productActive").checked;
+        const imageFile = document.getElementById("productImage").files[0];
 
         if (!name) {
           throw new Error("Inserisci il nome del prodotto.");
         }
 
-
-        let imageUrl = null;
+        let imageUrl = existingImageUrl;
 
         if (imageFile) {
-
           if (imageFile.type !== "image/jpeg") {
-            throw new Error(
-              "Per ora carica una foto in formato JPG/JPEG."
-            );
+            throw new Error("Per ora carica una foto in formato JPG/JPEG.");
           }
 
           if (imageFile.size > 5 * 1024 * 1024) {
-            throw new Error(
-              "La foto supera il limite massimo di 5 MB."
-            );
+            throw new Error("La foto supera il limite massimo di 5 MB.");
           }
 
+          const oldImageUrl = existingImageUrl;
           imageUrl = await uploadProductImage(imageFile);
-        }
 
+          if (editingProductId && oldImageUrl) {
+            await removeStorageImage(oldImageUrl);
+          }
+        }
 
         const productData = {
           name: name,
@@ -743,39 +848,56 @@
           category: category || null,
           page: page || null,
           offer_text: offerText || null,
-          image_url: imageUrl,
+          image_url: imageUrl || null,
           active: active,
           sort_order:
-            sortOrderValue !== ""
-              ? parseInt(sortOrderValue, 10)
-              : 0,
+            sortOrderValue !== "" ? parseInt(sortOrderValue, 10) : 0,
           updated_at: new Date().toISOString()
         };
 
+        let error;
 
-        const { error } = await supabaseClient
-          .from("products")
-          .insert(productData);
+        if (editingProductId) {
+          const result = await supabaseClient
+            .from("products")
+            .update(productData)
+            .eq("id", editingProductId);
 
+          error = result.error;
+        } else {
+          const result = await supabaseClient
+            .from("products")
+            .insert(productData);
 
-        if (error) {
-          throw error;
+          error = result.error;
         }
 
+        if (error) throw error;
 
         showFormStatus(
-          "Prodotto salvato correttamente.",
+          editingProductId
+            ? "Prodotto modificato correttamente."
+            : "Prodotto salvato correttamente.",
           "success"
         );
 
         await loadProducts();
 
+        const wasEditing = editingProductId !== null;
+
+        editingProductId = null;
+        existingImageUrl = null;
+
         productForm.reset();
         document.getElementById("productActive").checked = true;
         document.getElementById("productOrder").value = 0;
 
-      } catch (error) {
+        if (wasEditing) {
+          formTitle.textContent = "Aggiungi prodotto";
+          saveProductButton.textContent = "SALVA PRODOTTO";
+        }
 
+      } catch (error) {
         console.error(error);
 
         showFormStatus(
@@ -783,43 +905,34 @@
           "Si è verificato un errore durante il salvataggio.",
           "error"
         );
-
       } finally {
-
         saveProductButton.disabled = false;
-        saveProductButton.textContent = "SALVA PRODOTTO";
+
+        if (editingProductId) {
+          saveProductButton.textContent = "SALVA MODIFICHE";
+        } else {
+          saveProductButton.textContent = "SALVA PRODOTTO";
+        }
       }
     });
 
-
     loginForm.addEventListener("submit", async function(event) {
-
       event.preventDefault();
 
-      const email =
-        document.getElementById("email").value.trim();
-
-      const password =
-        document.getElementById("password").value;
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
 
       loginButton.disabled = true;
       loginButton.textContent = "ACCESSO...";
-
       message.style.display = "none";
 
-      const { error } =
-        await supabaseClient.auth.signInWithPassword({
-          email: email,
-          password: password
-        });
+      const { error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
 
       if (error) {
-
-        showMessage(
-          "Email o password non corretti.",
-          "error"
-        );
-
+        showMessage("Email o password non corretti.", "error");
         loginButton.disabled = false;
         loginButton.textContent = "ACCEDI";
         return;
@@ -827,36 +940,21 @@
 
       loginButton.disabled = false;
       loginButton.textContent = "ACCEDI";
-
       showDashboard();
     });
 
-
     logoutButton.addEventListener("click", async function() {
       await supabaseClient.auth.signOut();
-
       loginForm.reset();
       closeProductForm();
       showLogin();
     });
 
-
-    addProductButton.addEventListener(
-      "click",
-      openProductForm
-    );
-
-
-    cancelProductButton.addEventListener(
-      "click",
-      closeProductForm
-    );
-
+    addProductButton.addEventListener("click", openNewProductForm);
+    cancelProductButton.addEventListener("click", closeProductForm);
 
     async function checkSession() {
-
-      const { data } =
-        await supabaseClient.auth.getSession();
+      const { data } = await supabaseClient.auth.getSession();
 
       if (data.session) {
         showDashboard();
@@ -864,7 +962,6 @@
         showLogin();
       }
     }
-
 
     checkSession();
   </script>
