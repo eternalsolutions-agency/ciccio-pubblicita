@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="robots" content="noindex, nofollow">
 
   <title>Gestione Catalogo | Ciccio Pubblicità</title>
@@ -20,6 +19,11 @@
       min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
       background: #f4f5f7;
+      color: #171717;
+    }
+
+    .login-wrapper {
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -29,7 +33,7 @@
     .login-card {
       width: 100%;
       max-width: 420px;
-      background: #ffffff;
+      background: #fff;
       border-radius: 18px;
       padding: 40px;
       box-shadow: 0 15px 50px rgba(0,0,0,.12);
@@ -65,21 +69,15 @@
       border: 1px solid #d7d7d7;
       border-radius: 9px;
       font-size: 16px;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: #333;
     }
 
     button {
-      width: 100%;
       border: 0;
       border-radius: 9px;
-      padding: 14px;
+      padding: 13px 18px;
       background: #111;
-      color: white;
-      font-size: 15px;
+      color: #fff;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
     }
@@ -89,13 +87,16 @@
       cursor: not-allowed;
     }
 
+    .login-button {
+      width: 100%;
+    }
+
     #message {
       display: none;
       margin-top: 18px;
       padding: 12px;
       border-radius: 8px;
       font-size: 14px;
-      line-height: 1.4;
     }
 
     #message.error {
@@ -109,45 +110,181 @@
       background: #eefaf1;
       color: #176b2c;
     }
+
+    #dashboard {
+      display: none;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 35px 20px;
+    }
+
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+      margin: 0 0 5px;
+      font-size: 30px;
+    }
+
+    .dashboard-header p {
+      margin: 0;
+      color: #666;
+    }
+
+    .logout-button {
+      background: #fff;
+      color: #111;
+      border: 1px solid #ddd;
+    }
+
+    .toolbar {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 25px rgba(0,0,0,.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .add-button {
+      background: #111;
+    }
+
+    .products-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 6px 25px rgba(0,0,0,.06);
+    }
+
+    #productsList {
+      min-height: 100px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      color: #777;
+    }
+
+    .product-row {
+      padding: 16px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .product-row:last-child {
+      border-bottom: 0;
+    }
+
+    .product-row strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .product-row span {
+      color: #666;
+      font-size: 14px;
+    }
+
+    @media (max-width: 650px) {
+      .dashboard-header,
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .dashboard-header button,
+      .toolbar button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="login-card">
+  <div id="loginSection" class="login-wrapper">
+    <div class="login-card">
 
-    <div class="brand">
-      <h1>Ciccio Pubblicità</h1>
-      <p>Gestione Catalogo</p>
+      <div class="brand">
+        <h1>Ciccio Pubblicità</h1>
+        <p>Gestione Catalogo</p>
+      </div>
+
+      <form id="loginForm">
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          autocomplete="username"
+          required
+        >
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          autocomplete="current-password"
+          required
+        >
+
+        <button
+          type="submit"
+          id="loginButton"
+          class="login-button"
+        >
+          ACCEDI
+        </button>
+
+        <div id="message"></div>
+
+      </form>
+    </div>
+  </div>
+
+
+  <main id="dashboard">
+
+    <div class="dashboard-header">
+      <div>
+        <h1>Gestione Catalogo</h1>
+        <p>Ciccio Pubblicità</p>
+      </div>
+
+      <button id="logoutButton" class="logout-button">
+        ESCI
+      </button>
     </div>
 
-    <form id="loginForm">
+    <div class="toolbar">
+      <div>
+        <strong>Prodotti</strong>
+      </div>
 
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        autocomplete="username"
-        required
-      >
-
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        autocomplete="current-password"
-        required
-      >
-
-      <button type="submit" id="loginButton">
-        ACCEDI
+      <button id="addProductButton" class="add-button">
+        + AGGIUNGI PRODOTTO
       </button>
+    </div>
 
-      <div id="message"></div>
+    <div class="products-box">
+      <div id="productsList">
+        <div class="empty-state">
+          Caricamento prodotti...
+        </div>
+      </div>
+    </div>
 
-    </form>
+  </main>
 
-  </div>
 
   <script src="supabase-config.js"></script>
 
@@ -157,13 +294,86 @@
       SUPABASE_PUBLISHABLE_KEY
     );
 
+    const loginSection = document.getElementById("loginSection");
+    const dashboard = document.getElementById("dashboard");
     const loginForm = document.getElementById("loginForm");
     const loginButton = document.getElementById("loginButton");
+    const logoutButton = document.getElementById("logoutButton");
     const message = document.getElementById("message");
+    const productsList = document.getElementById("productsList");
 
     function showMessage(text, type) {
       message.textContent = text;
       message.className = type;
+    }
+
+    function showDashboard() {
+      loginSection.style.display = "none";
+      dashboard.style.display = "block";
+      loadProducts();
+    }
+
+    function showLogin() {
+      dashboard.style.display = "none";
+      loginSection.style.display = "flex";
+    }
+
+    async function loadProducts() {
+
+      productsList.innerHTML =
+        '<div class="empty-state">Caricamento prodotti...</div>';
+
+      const { data, error } = await supabaseClient
+        .from("products")
+        .select("*")
+        .order("sort_order", { ascending: true });
+
+      if (error) {
+        console.error(error);
+
+        productsList.innerHTML =
+          '<div class="empty-state">Errore durante il caricamento dei prodotti.</div>';
+
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        productsList.innerHTML =
+          '<div class="empty-state">Nessun prodotto presente.</div>';
+
+        return;
+      }
+
+      productsList.innerHTML = "";
+
+      data.forEach(function(product) {
+
+        const row = document.createElement("div");
+        row.className = "product-row";
+
+        const name = document.createElement("strong");
+        name.textContent = product.name || "Prodotto senza nome";
+
+        const details = document.createElement("span");
+
+        let text = "";
+
+        if (product.code) {
+          text += "Cod. " + product.code;
+        }
+
+        if (product.price !== null && product.price !== undefined) {
+          if (text) text += " · ";
+          text += "€ " + product.price;
+        }
+
+        details.textContent = text || "Nessun dettaglio";
+
+        row.appendChild(name);
+        row.appendChild(details);
+
+        productsList.appendChild(row);
+      });
     }
 
     loginForm.addEventListener("submit", async function(event) {
@@ -177,7 +387,7 @@
 
       message.style.display = "none";
 
-      const { data, error } =
+      const { error } =
         await supabaseClient.auth.signInWithPassword({
           email: email,
           password: password
@@ -194,15 +404,36 @@
         return;
       }
 
-      showMessage(
-        "Accesso effettuato correttamente.",
-        "success"
-      );
+      loginButton.disabled = false;
+      loginButton.textContent = "ACCEDI";
 
-      loginButton.textContent = "ACCESSO ESEGUITO";
-
-      console.log("Utente autenticato:", data.user);
+      showDashboard();
     });
+
+    logoutButton.addEventListener("click", async function() {
+      await supabaseClient.auth.signOut();
+      loginForm.reset();
+      showLogin();
+    });
+
+    async function checkSession() {
+
+      const { data } = await supabaseClient.auth.getSession();
+
+      if (data.session) {
+        showDashboard();
+      } else {
+        showLogin();
+      }
+    }
+
+    document
+      .getElementById("addProductButton")
+      .addEventListener("click", function() {
+        alert("Nel prossimo passaggio creeremo la scheda per aggiungere un prodotto.");
+      });
+
+    checkSession();
   </script>
 
 </body>
