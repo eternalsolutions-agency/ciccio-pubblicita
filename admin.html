@@ -53,7 +53,8 @@
     }
 
     input,
-    textarea {
+    textarea,
+    select {
       width: 100%;
       padding: 12px 14px;
       margin-bottom: 18px;
@@ -132,6 +133,47 @@
       background: #fff;
       color: #111;
       border: 1px solid #ddd;
+    }
+
+    .catalog-tools {
+      background: #fff;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 25px rgba(0,0,0,.06);
+    }
+
+    .catalog-filters {
+      display: grid;
+      grid-template-columns: minmax(240px, 1fr) minmax(180px, 260px) auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .catalog-filters input,
+    .catalog-filters select {
+      margin-bottom: 0;
+    }
+
+    .filter-field label {
+      margin-bottom: 7px;
+    }
+
+    .reset-filters-button {
+      background: #fff;
+      color: #111;
+      border: 1px solid #ddd;
+      white-space: nowrap;
+    }
+
+    .products-counter {
+      margin-top: 14px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .products-counter strong {
+      color: #171717;
     }
 
     .toolbar,
@@ -335,6 +377,14 @@
         flex-direction: column;
       }
 
+      .catalog-filters {
+        grid-template-columns: 1fr;
+      }
+
+      .reset-filters-button {
+        width: 100%;
+      }
+
       .form-grid {
         grid-template-columns: 1fr;
       }
@@ -505,6 +555,35 @@
       </button>
     </div>
 
+    <div class="catalog-tools">
+      <div class="catalog-filters">
+        <div class="filter-field">
+          <label for="productSearch">Cerca prodotto</label>
+          <input
+            type="search"
+            id="productSearch"
+            placeholder="Nome o codice articolo..."
+            autocomplete="off"
+          >
+        </div>
+
+        <div class="filter-field">
+          <label for="categoryFilter">Categoria</label>
+          <select id="categoryFilter">
+            <option value="">Tutte le categorie</option>
+          </select>
+        </div>
+
+        <button type="button" id="resetFiltersButton" class="reset-filters-button">
+          AZZERA FILTRI
+        </button>
+      </div>
+
+      <div id="productsCounter" class="products-counter">
+        Prodotti: <strong>0</strong>
+      </div>
+    </div>
+
     <div class="products-box">
       <div id="productsList">
         <div class="empty-state">Caricamento prodotti...</div>
@@ -543,6 +622,10 @@
     const formTitle = document.getElementById("formTitle");
     const currentImagesBox = document.getElementById("currentImagesBox");
     const currentImagesList = document.getElementById("currentImagesList");
+    const productSearch = document.getElementById("productSearch");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const resetFiltersButton = document.getElementById("resetFiltersButton");
+    const productsCounter = document.getElementById("productsCounter");
 
     function showMessage(text, type) {
       message.textContent = text;
@@ -702,24 +785,75 @@
       }
     }
 
-    async function loadProducts() {
-      productsList.innerHTML =
-        '<div class="empty-state">Caricamento prodotti...</div>';
+    function normalizeText(value) {
+      return String(value || "")
+        .toLocaleLowerCase("it-IT")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
 
-      const { data, error } = await supabaseClient
-        .from("products")
-        .select("*")
-        .order("sort_order", { ascending: true })
-        .order("id", { ascending: true });
+    function updateCategoryFilter() {
+      const selectedCategory = categoryFilter.value;
 
-      if (error) {
-        console.error(error);
-        productsList.innerHTML =
-          '<div class="empty-state">Errore durante il caricamento dei prodotti.</div>';
-        return;
+      const categories = [...new Set(
+        productsCache
+          .map(function(product) {
+            return (product.category || "").trim();
+          })
+          .filter(Boolean)
+      )].sort(function(a, b) {
+        return a.localeCompare(b, "it", { sensitivity: "base" });
+      });
+
+      categoryFilter.innerHTML =
+        '<option value="">Tutte le categorie</option>';
+
+      categories.forEach(function(category) {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+      });
+
+      if (categories.includes(selectedCategory)) {
+        categoryFilter.value = selectedCategory;
       }
+    }
 
-      productsCache = data || [];
+    function getFilteredProducts() {
+      const searchTerm = normalizeText(productSearch.value.trim());
+      const selectedCategory = categoryFilter.value;
+
+      return productsCache.filter(function(product) {
+        const matchesSearch =
+          !searchTerm ||
+          normalizeText(product.name).includes(searchTerm) ||
+          normalizeText(product.code).includes(searchTerm);
+
+        const matchesCategory =
+          !selectedCategory ||
+          product.category === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+      });
+    }
+
+    function updateProductsCounter(filteredCount) {
+      const total = productsCache.length;
+
+      if (productSearch.value.trim() || categoryFilter.value) {
+        productsCounter.innerHTML =
+          'Risultati: <strong>' + filteredCount +
+          '</strong> su <strong>' + total + '</strong> prodotti';
+      } else {
+        productsCounter.innerHTML =
+          'Prodotti totali: <strong>' + total + '</strong>';
+      }
+    }
+
+    function renderProducts() {
+      const filteredProducts = getFilteredProducts();
+      updateProductsCounter(filteredProducts.length);
 
       if (productsCache.length === 0) {
         productsList.innerHTML =
@@ -727,9 +861,15 @@
         return;
       }
 
+      if (filteredProducts.length === 0) {
+        productsList.innerHTML =
+          '<div class="empty-state">Nessun prodotto corrisponde ai filtri selezionati.</div>';
+        return;
+      }
+
       productsList.innerHTML = "";
 
-      productsCache.forEach(function(product) {
+      filteredProducts.forEach(function(product) {
         const row = document.createElement("div");
         row.className = "product-row";
 
@@ -816,6 +956,29 @@
         row.appendChild(actions);
         productsList.appendChild(row);
       });
+    }
+
+    async function loadProducts() {
+      productsList.innerHTML =
+        '<div class="empty-state">Caricamento prodotti...</div>';
+
+      const { data, error } = await supabaseClient
+        .from("products")
+        .select("*")
+        .order("sort_order", { ascending: true })
+        .order("id", { ascending: true });
+
+      if (error) {
+        console.error(error);
+        productsList.innerHTML =
+          '<div class="empty-state">Errore durante il caricamento dei prodotti.</div>';
+        productsCounter.innerHTML = 'Prodotti: <strong>0</strong>';
+        return;
+      }
+
+      productsCache = data || [];
+      updateCategoryFilter();
+      renderProducts();
     }
 
     function editProduct(id) {
@@ -1133,6 +1296,16 @@ const productData = {
 
     addProductButton.addEventListener("click", openNewProductForm);
     cancelProductButton.addEventListener("click", closeProductForm);
+
+    productSearch.addEventListener("input", renderProducts);
+    categoryFilter.addEventListener("change", renderProducts);
+
+    resetFiltersButton.addEventListener("click", function() {
+      productSearch.value = "";
+      categoryFilter.value = "";
+      renderProducts();
+      productSearch.focus();
+    });
 
     async function checkSession() {
       const { data } = await supabaseClient.auth.getSession();
