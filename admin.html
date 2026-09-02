@@ -1016,9 +1016,7 @@ async function uploadProductImages(files) {
         }
 
         imageUrl = currentImages.length > 0 ? currentImages[0] : null;
-}
-
-        const productData = {
+const productData = {
           name: name,
           code: code || null,
           description: description || null,
