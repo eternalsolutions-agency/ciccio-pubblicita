@@ -769,32 +769,60 @@
     }
 
     async function uploadProductImage(file) {
-      if (!file) return null;
+  if (!file) return null;
 
-      const extension = file.name.split(".").pop().toLowerCase();
+  const extension = file.name.split(".").pop().toLowerCase();
 
-      const safeFileName =
-        Date.now() +
-        "-" +
-        Math.random().toString(36).substring(2, 10) +
-        "." +
-        extension;
+  const safeFileName =
+    Date.now() +
+    "-" +
+    Math.random().toString(36).substring(2, 10) +
+    "." +
+    extension;
 
-      const { error: uploadError } = await supabaseClient.storage
-        .from("product-images")
-        .upload(safeFileName, file, {
-          cacheControl: "3600",
-          upsert: false
-        });
+  const { error: uploadError } = await supabaseClient.storage
+    .from("product-images")
+    .upload(safeFileName, file, {
+      cacheControl: "3600",
+      upsert: false
+    });
 
-      if (uploadError) throw uploadError;
+  if (uploadError) throw uploadError;
 
-      const { data } = supabaseClient.storage
-        .from("product-images")
-        .getPublicUrl(safeFileName);
+  const { data } = supabaseClient.storage
+    .from("product-images")
+    .getPublicUrl(safeFileName);
 
-      return data.publicUrl;
+  return data.publicUrl;
+}
+
+
+async function uploadProductImages(files) {
+  const uploadedUrls = [];
+
+  for (const file of files) {
+
+    if (file.type !== "image/jpeg") {
+      throw new Error(
+        "Per ora puoi caricare solamente immagini JPG/JPEG."
+      );
     }
+
+    if (file.size > 5 * 1024 * 1024) {
+      throw new Error(
+        "Una delle immagini supera il limite massimo di 5 MB."
+      );
+    }
+
+    const imageUrl = await uploadProductImage(file);
+
+    if (imageUrl) {
+      uploadedUrls.push(imageUrl);
+    }
+  }
+
+  return uploadedUrls;
+}
 
     productForm.addEventListener("submit", async function(event) {
       event.preventDefault();
