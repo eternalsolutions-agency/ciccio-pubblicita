@@ -847,7 +847,9 @@ async function uploadProductImages(files) {
         const sortOrderValue =
           document.getElementById("productOrder").value;
         const active = document.getElementById("productActive").checked;
-        const imageFile = document.getElementById("productImage").files[0];
+        const imageFiles = Array.from(
+  document.getElementById("productImage").files
+);
 
         if (!name) {
           throw new Error("Inserisci il nome del prodotto.");
