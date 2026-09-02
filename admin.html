@@ -1,1 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Gestione Catalogo | Ciccio Pubblicità</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 15px 50px rgba(0,0,0,.12);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .brand h1 {
+      margin: 0 0 8px;
+      font-size: 26px;
+    }
+
+    .brand p {
+      margin: 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px 14px;
+      margin-bottom: 18px;
+      border: 1px solid #d7d7d7;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #333;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 9px;
+      padding: 14px;
+      background: #111;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    #message {
+      display: none;
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    #message.error {
+      display: block;
+      background: #fff0f0;
+      color: #a40000;
+    }
+
+    #message.success {
+      display: block;
+      background: #eefaf1;
+      color: #176b2c;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+
+    <div class="brand">
+      <h1>Ciccio Pubblicità</h1>
+      <p>Gestione Catalogo</p>
+    </div>
+
+    <form id="loginForm">
+
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        autocomplete="username"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button type="submit" id="loginButton">
+        ACCEDI
+      </button>
+
+      <div id="message"></div>
+
+    </form>
+
+  </div>
+
+  <script src="supabase-config.js"></script>
+
+  <script>
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const loginForm = document.getElementById("loginForm");
+    const loginButton = document.getElementById("loginButton");
+    const message = document.getElementById("message");
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = type;
+    }
+
+    loginForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      loginButton.disabled = true;
+      loginButton.textContent = "ACCESSO...";
+
+      message.style.display = "none";
+
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+      if (error) {
+        showMessage(
+          "Email o password non corretti.",
+          "error"
+        );
+
+        loginButton.disabled = false;
+        loginButton.textContent = "ACCEDI";
+        return;
+      }
+
+      showMessage(
+        "Accesso effettuato correttamente.",
+        "success"
+      );
+
+      loginButton.textContent = "ACCESSO ESEGUITO";
+
+      console.log("Utente autenticato:", data.user);
+    });
+  </script>
+
+</body>
+</html>
