@@ -278,6 +278,55 @@
       background: #b42318;
     }
 
+    .current-images-box {
+      grid-column: 1 / -1;
+      display: none;
+      margin-bottom: 20px;
+    }
+
+    .current-images-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .gallery-item {
+      width: 130px;
+      padding: 8px;
+      border: 1px solid #e2e2e2;
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .gallery-main-label {
+      display: block;
+      margin-bottom: 7px;
+      padding: 4px 6px;
+      border-radius: 5px;
+      background: #e9f7ed;
+      color: #176b2c;
+      font-size: 10px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .gallery-remove-button {
+      width: 100%;
+      padding: 8px;
+      background: #b42318;
+      font-size: 11px;
+    }
+
     @media (max-width: 760px) {
       .dashboard-header,
       .toolbar,
@@ -414,11 +463,16 @@
           <div>
             <label for="productImage">Foto prodotto</label>
             <input
-  type="file"
-  id="productImage"
-  accept="image/jpeg"
-  multiple
->
+              type="file"
+              id="productImage"
+              accept="image/jpeg"
+              multiple
+            >
+          </div>
+
+          <div id="currentImagesBox" class="current-images-box">
+            <label>Immagini attuali</label>
+            <div id="currentImagesList" class="current-images-list"></div>
           </div>
 
           <div class="full checkbox-row">
@@ -470,6 +524,7 @@
     let productsCache = [];
     let editingProductId = null;
     let existingImageUrl = null;
+    let editingImages = [];
 
     const loginSection = document.getElementById("loginSection");
     const dashboard = document.getElementById("dashboard");
@@ -486,6 +541,8 @@
     const saveProductButton = document.getElementById("saveProductButton");
     const formStatus = document.getElementById("formStatus");
     const formTitle = document.getElementById("formTitle");
+    const currentImagesBox = document.getElementById("currentImagesBox");
+    const currentImagesList = document.getElementById("currentImagesList");
 
     function showMessage(text, type) {
       message.textContent = text;
@@ -513,10 +570,95 @@
       loginSection.style.display = "flex";
     }
 
+    function renderCurrentImages() {
+      currentImagesList.innerHTML = "";
+
+      if (!editingProductId || editingImages.length === 0) {
+        currentImagesBox.style.display = "none";
+        return;
+      }
+
+      currentImagesBox.style.display = "block";
+
+      editingImages.forEach(function(url, index) {
+        const item = document.createElement("div");
+        item.className = "gallery-item";
+
+        const image = document.createElement("img");
+        image.src = url;
+        image.alt = "Immagine prodotto " + (index + 1);
+        item.appendChild(image);
+
+        if (index === 0) {
+          const mainLabel = document.createElement("span");
+          mainLabel.className = "gallery-main-label";
+          mainLabel.textContent = "PRINCIPALE";
+          item.appendChild(mainLabel);
+        }
+
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.className = "gallery-remove-button";
+        removeButton.textContent = "RIMUOVI";
+        removeButton.addEventListener("click", function() {
+          removeGalleryImage(index);
+        });
+
+        item.appendChild(removeButton);
+        currentImagesList.appendChild(item);
+      });
+    }
+
+    async function removeGalleryImage(index) {
+      const imageUrl = editingImages[index];
+      if (!imageUrl) return;
+
+      if (!confirm("Vuoi rimuovere questa immagine dal prodotto?")) return;
+
+      const previousImages = [...editingImages];
+      editingImages.splice(index, 1);
+      existingImageUrl = editingImages[0] || null;
+
+      const { error } = await supabaseClient
+        .from("products")
+        .update({
+          images: editingImages,
+          image_url: existingImageUrl,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", editingProductId);
+
+      if (error) {
+        editingImages = previousImages;
+        existingImageUrl = editingImages[0] || null;
+        alert("Errore durante la rimozione dell'immagine.");
+        console.error(error);
+        renderCurrentImages();
+        return;
+      }
+
+      await removeStorageImage(imageUrl);
+
+      const cachedProduct = productsCache.find(function(item) {
+        return item.id === editingProductId;
+      });
+
+      if (cachedProduct) {
+        cachedProduct.images = [...editingImages];
+        cachedProduct.image_url = existingImageUrl;
+      }
+
+      renderCurrentImages();
+      await loadProducts();
+    }
+
     function resetProductForm() {
       productForm.reset();
       editingProductId = null;
       existingImageUrl = null;
+      editingImages = [];
+      currentImagesList.innerHTML = "";
+      currentImagesBox.style.display = "none";
       formTitle.textContent = "Aggiungi prodotto";
       saveProductButton.textContent = "SALVA PRODOTTO";
       document.getElementById("productActive").checked = true;
@@ -684,7 +826,16 @@
       if (!product) return;
 
       editingProductId = product.id;
-      existingImageUrl = product.image_url || null;
+
+      if (Array.isArray(product.images) && product.images.length > 0) {
+        editingImages = [...product.images];
+      } else if (product.image_url) {
+        editingImages = [product.image_url];
+      } else {
+        editingImages = [];
+      }
+
+      existingImageUrl = editingImages[0] || product.image_url || null;
 
       formTitle.textContent = "Modifica prodotto";
       saveProductButton.textContent = "SALVA MODIFICHE";
@@ -703,6 +854,7 @@
       document.getElementById("productImage").value = "";
 
       clearFormStatus();
+      renderCurrentImages();
       productFormBox.style.display = "block";
       productFormBox.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -856,30 +1008,14 @@ async function uploadProductImages(files) {
         }
 
         let imageUrl = existingImageUrl;
+        let currentImages = editingProductId ? [...editingImages] : [];
 
-let currentImages = [];
+        if (imageFiles.length > 0) {
+          const newImageUrls = await uploadProductImages(imageFiles);
+          currentImages = currentImages.concat(newImageUrls);
+        }
 
-if (editingProductId) {
-  const currentProduct = productsCache.find(function(item) {
-    return item.id === editingProductId;
-  });
-
-  if (currentProduct && Array.isArray(currentProduct.images)) {
-    currentImages = [...currentProduct.images];
-  } else if (existingImageUrl) {
-    currentImages = [existingImageUrl];
-  }
-}
-
-if (imageFiles.length > 0) {
-
-  const newImageUrls = await uploadProductImages(imageFiles);
-
-  currentImages = currentImages.concat(newImageUrls);
-
-  if (!imageUrl && newImageUrls.length > 0) {
-    imageUrl = newImageUrls[0];
-  }
+        imageUrl = currentImages.length > 0 ? currentImages[0] : null;
 }
 
         const productData = {
@@ -931,6 +1067,9 @@ if (imageFiles.length > 0) {
 
         editingProductId = null;
         existingImageUrl = null;
+        editingImages = [];
+        currentImagesList.innerHTML = "";
+        currentImagesBox.style.display = "none";
 
         productForm.reset();
         document.getElementById("productActive").checked = true;
