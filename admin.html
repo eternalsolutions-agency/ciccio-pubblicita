@@ -10,9 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -44,16 +42,8 @@
       margin-bottom: 30px;
     }
 
-    .brand h1 {
-      margin: 0 0 8px;
-      font-size: 26px;
-    }
-
-    .brand p {
-      margin: 0;
-      color: #666;
-      font-size: 14px;
-    }
+    .brand h1 { margin: 0 0 8px; font-size: 26px; }
+    .brand p { margin: 0; color: #666; font-size: 14px; }
 
     label {
       display: block;
@@ -62,13 +52,21 @@
       font-size: 14px;
     }
 
-    input {
+    input,
+    textarea,
+    select {
       width: 100%;
-      padding: 13px 14px;
+      padding: 12px 14px;
       margin-bottom: 18px;
       border: 1px solid #d7d7d7;
       border-radius: 9px;
-      font-size: 16px;
+      font: inherit;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
     }
 
     button {
@@ -83,13 +81,11 @@
     }
 
     button:disabled {
-      opacity: .6;
+      opacity: .55;
       cursor: not-allowed;
     }
 
-    .login-button {
-      width: 100%;
-    }
+    .login-button { width: 100%; }
 
     #message {
       display: none;
@@ -105,12 +101,6 @@
       color: #a40000;
     }
 
-    #message.success {
-      display: block;
-      background: #eefaf1;
-      color: #176b2c;
-    }
-
     #dashboard {
       display: none;
       max-width: 1200px;
@@ -118,11 +108,15 @@
       padding: 35px 20px;
     }
 
-    .dashboard-header {
+    .dashboard-header,
+    .toolbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
+    }
+
+    .dashboard-header {
       margin-bottom: 30px;
     }
 
@@ -136,37 +130,82 @@
       color: #666;
     }
 
-    .logout-button {
+    .logout-button,
+    .cancel-button {
       background: #fff;
       color: #111;
       border: 1px solid #ddd;
     }
 
-    .toolbar {
+    .toolbar,
+    .products-box,
+    .product-form-box {
       background: #fff;
       border-radius: 16px;
       padding: 20px;
       margin-bottom: 20px;
       box-shadow: 0 6px 25px rgba(0,0,0,.06);
+    }
+
+    .product-form-box {
+      display: none;
+      padding: 28px;
+    }
+
+    .product-form-box h2 {
+      margin-top: 0;
+      margin-bottom: 25px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 20px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .checkbox-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
+      margin-bottom: 22px;
     }
 
-    .add-button {
-      background: #111;
+    .checkbox-row input {
+      width: auto;
+      margin: 0;
     }
 
-    .products-box {
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 6px 25px rgba(0,0,0,.06);
+    .checkbox-row label {
+      margin: 0;
     }
 
-    #productsList {
-      min-height: 100px;
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .form-status {
+      display: none;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .form-status.error {
+      display: block;
+      background: #fff0f0;
+      color: #a40000;
+    }
+
+    .form-status.success {
+      display: block;
+      background: #eefaf1;
+      color: #176b2c;
     }
 
     .empty-state {
@@ -176,7 +215,10 @@
     }
 
     .product-row {
-      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 5px;
       border-bottom: 1px solid #eee;
     }
 
@@ -184,25 +226,56 @@
       border-bottom: 0;
     }
 
-    .product-row strong {
-      display: block;
-      margin-bottom: 5px;
+    .product-thumb {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: #eee;
+      flex: 0 0 70px;
     }
 
-    .product-row span {
+    .product-info strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .product-info span {
+      display: block;
       color: #666;
       font-size: 14px;
+      line-height: 1.5;
     }
 
-    @media (max-width: 650px) {
+    .hidden-label {
+      display: inline-block !important;
+      margin-top: 5px;
+      padding: 3px 7px;
+      background: #eee;
+      border-radius: 5px;
+      font-size: 11px !important;
+      font-weight: 700;
+    }
+
+    @media (max-width: 700px) {
       .dashboard-header,
-      .toolbar {
+      .toolbar,
+      .form-actions {
         align-items: stretch;
         flex-direction: column;
       }
 
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+
       .dashboard-header button,
-      .toolbar button {
+      .toolbar button,
+      .form-actions button {
         width: 100%;
       }
     }
@@ -222,31 +295,16 @@
       <form id="loginForm">
 
         <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          autocomplete="username"
-          required
-        >
+        <input type="email" id="email" autocomplete="username" required>
 
         <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          autocomplete="current-password"
-          required
-        >
+        <input type="password" id="password" autocomplete="current-password" required>
 
-        <button
-          type="submit"
-          id="loginButton"
-          class="login-button"
-        >
+        <button type="submit" id="loginButton" class="login-button">
           ACCEDI
         </button>
 
         <div id="message"></div>
-
       </form>
     </div>
   </div>
@@ -260,26 +318,136 @@
         <p>Ciccio Pubblicità</p>
       </div>
 
-      <button id="logoutButton" class="logout-button">
-        ESCI
-      </button>
+      <button id="logoutButton" class="logout-button">ESCI</button>
     </div>
+
+
+    <div id="productFormBox" class="product-form-box">
+
+      <h2>Aggiungi prodotto</h2>
+
+      <div id="formStatus" class="form-status"></div>
+
+      <form id="productForm">
+
+        <div class="form-grid">
+
+          <div>
+            <label for="productName">Nome prodotto *</label>
+            <input type="text" id="productName" required>
+          </div>
+
+          <div>
+            <label for="productCode">Codice articolo</label>
+            <input type="text" id="productCode">
+          </div>
+
+          <div class="full">
+            <label for="productDescription">Descrizione</label>
+            <textarea id="productDescription"></textarea>
+          </div>
+
+          <div>
+            <label for="productPrice">Prezzo (€)</label>
+            <input
+              type="number"
+              id="productPrice"
+              min="0"
+              step="0.01"
+              placeholder="Es. 149.00"
+            >
+          </div>
+
+          <div>
+            <label for="productQuantity">Quantità / minimo ordine</label>
+            <input
+              type="text"
+              id="productQuantity"
+              placeholder="Es. 100 pezzi"
+            >
+          </div>
+
+          <div>
+            <label for="productCategory">Categoria</label>
+            <input
+              type="text"
+              id="productCategory"
+              placeholder="Es. Abbigliamento"
+            >
+          </div>
+
+          <div>
+            <label for="productPage">Pagina catalogo</label>
+            <input
+              type="text"
+              id="productPage"
+              placeholder="Es. 74"
+            >
+          </div>
+
+          <div class="full">
+            <label for="productOffer">Testo offerta</label>
+            <input
+              type="text"
+              id="productOffer"
+              placeholder="Es. 100 pezzi € 149"
+            >
+          </div>
+
+          <div>
+            <label for="productOrder">Ordine visualizzazione</label>
+            <input
+              type="number"
+              id="productOrder"
+              value="0"
+              step="1"
+            >
+          </div>
+
+          <div>
+            <label for="productImage">Foto prodotto</label>
+            <input
+              type="file"
+              id="productImage"
+              accept="image/jpeg"
+            >
+          </div>
+
+          <div class="full checkbox-row">
+            <input type="checkbox" id="productActive" checked>
+            <label for="productActive">Prodotto visibile nel catalogo</label>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" id="saveProductButton">
+            SALVA PRODOTTO
+          </button>
+
+          <button type="button" id="cancelProductButton" class="cancel-button">
+            ANNULLA
+          </button>
+        </div>
+
+      </form>
+    </div>
+
 
     <div class="toolbar">
       <div>
         <strong>Prodotti</strong>
       </div>
 
-      <button id="addProductButton" class="add-button">
+      <button id="addProductButton">
         + AGGIUNGI PRODOTTO
       </button>
     </div>
 
+
     <div class="products-box">
       <div id="productsList">
-        <div class="empty-state">
-          Caricamento prodotti...
-        </div>
+        <div class="empty-state">Caricamento prodotti...</div>
       </div>
     </div>
 
@@ -296,16 +464,39 @@
 
     const loginSection = document.getElementById("loginSection");
     const dashboard = document.getElementById("dashboard");
+
     const loginForm = document.getElementById("loginForm");
     const loginButton = document.getElementById("loginButton");
     const logoutButton = document.getElementById("logoutButton");
     const message = document.getElementById("message");
+
     const productsList = document.getElementById("productsList");
+
+    const addProductButton = document.getElementById("addProductButton");
+    const productFormBox = document.getElementById("productFormBox");
+    const productForm = document.getElementById("productForm");
+    const cancelProductButton = document.getElementById("cancelProductButton");
+    const saveProductButton = document.getElementById("saveProductButton");
+    const formStatus = document.getElementById("formStatus");
+
 
     function showMessage(text, type) {
       message.textContent = text;
       message.className = type;
     }
+
+
+    function showFormStatus(text, type) {
+      formStatus.textContent = text;
+      formStatus.className = "form-status " + type;
+    }
+
+
+    function clearFormStatus() {
+      formStatus.textContent = "";
+      formStatus.className = "form-status";
+    }
+
 
     function showDashboard() {
       loginSection.style.display = "none";
@@ -313,10 +504,35 @@
       loadProducts();
     }
 
+
     function showLogin() {
       dashboard.style.display = "none";
       loginSection.style.display = "flex";
     }
+
+
+    function openProductForm() {
+      clearFormStatus();
+      productForm.reset();
+
+      document.getElementById("productActive").checked = true;
+      document.getElementById("productOrder").value = 0;
+
+      productFormBox.style.display = "block";
+
+      productFormBox.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+
+    function closeProductForm() {
+      productFormBox.style.display = "none";
+      productForm.reset();
+      clearFormStatus();
+    }
+
 
     async function loadProducts() {
 
@@ -326,7 +542,8 @@
       const { data, error } = await supabaseClient
         .from("products")
         .select("*")
-        .order("sort_order", { ascending: true });
+        .order("sort_order", { ascending: true })
+        .order("id", { ascending: true });
 
       if (error) {
         console.error(error);
@@ -351,36 +568,239 @@
         const row = document.createElement("div");
         row.className = "product-row";
 
+        if (product.image_url) {
+          const image = document.createElement("img");
+          image.className = "product-thumb";
+          image.src = product.image_url;
+          image.alt = product.name || "Prodotto";
+          row.appendChild(image);
+        }
+
+        const info = document.createElement("div");
+        info.className = "product-info";
+
         const name = document.createElement("strong");
         name.textContent = product.name || "Prodotto senza nome";
 
         const details = document.createElement("span");
 
-        let text = "";
+        const detailsArray = [];
 
         if (product.code) {
-          text += "Cod. " + product.code;
+          detailsArray.push("Cod. " + product.code);
         }
 
         if (product.price !== null && product.price !== undefined) {
-          if (text) text += " · ";
-          text += "€ " + product.price;
+          detailsArray.push(
+            "€ " +
+            Number(product.price).toLocaleString("it-IT", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            })
+          );
         }
 
-        details.textContent = text || "Nessun dettaglio";
+        if (product.quantity) {
+          detailsArray.push(product.quantity);
+        }
 
-        row.appendChild(name);
-        row.appendChild(details);
+        if (product.category) {
+          detailsArray.push(product.category);
+        }
 
+        details.textContent =
+          detailsArray.length > 0
+            ? detailsArray.join(" · ")
+            : "Nessun dettaglio";
+
+        info.appendChild(name);
+        info.appendChild(details);
+
+        if (!product.active) {
+          const hidden = document.createElement("span");
+          hidden.className = "hidden-label";
+          hidden.textContent = "NASCOSTO";
+          info.appendChild(hidden);
+        }
+
+        row.appendChild(info);
         productsList.appendChild(row);
       });
     }
 
+
+    async function uploadProductImage(file) {
+
+      if (!file) {
+        return null;
+      }
+
+      const extension = file.name.split(".").pop().toLowerCase();
+
+      const safeFileName =
+        Date.now() +
+        "-" +
+        Math.random().toString(36).substring(2, 10) +
+        "." +
+        extension;
+
+      const { error: uploadError } =
+        await supabaseClient.storage
+          .from("product-images")
+          .upload(safeFileName, file, {
+            cacheControl: "3600",
+            upsert: false
+          });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { data } =
+        supabaseClient.storage
+          .from("product-images")
+          .getPublicUrl(safeFileName);
+
+      return data.publicUrl;
+    }
+
+
+    productForm.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+      clearFormStatus();
+
+      saveProductButton.disabled = true;
+      saveProductButton.textContent = "SALVATAGGIO...";
+
+      try {
+
+        const name =
+          document.getElementById("productName").value.trim();
+
+        const code =
+          document.getElementById("productCode").value.trim();
+
+        const description =
+          document.getElementById("productDescription").value.trim();
+
+        const priceValue =
+          document.getElementById("productPrice").value;
+
+        const quantity =
+          document.getElementById("productQuantity").value.trim();
+
+        const category =
+          document.getElementById("productCategory").value.trim();
+
+        const page =
+          document.getElementById("productPage").value.trim();
+
+        const offerText =
+          document.getElementById("productOffer").value.trim();
+
+        const sortOrderValue =
+          document.getElementById("productOrder").value;
+
+        const active =
+          document.getElementById("productActive").checked;
+
+        const imageFile =
+          document.getElementById("productImage").files[0];
+
+
+        if (!name) {
+          throw new Error("Inserisci il nome del prodotto.");
+        }
+
+
+        let imageUrl = null;
+
+        if (imageFile) {
+
+          if (imageFile.type !== "image/jpeg") {
+            throw new Error(
+              "Per ora carica una foto in formato JPG/JPEG."
+            );
+          }
+
+          if (imageFile.size > 5 * 1024 * 1024) {
+            throw new Error(
+              "La foto supera il limite massimo di 5 MB."
+            );
+          }
+
+          imageUrl = await uploadProductImage(imageFile);
+        }
+
+
+        const productData = {
+          name: name,
+          code: code || null,
+          description: description || null,
+          price: priceValue !== "" ? Number(priceValue) : null,
+          quantity: quantity || null,
+          category: category || null,
+          page: page || null,
+          offer_text: offerText || null,
+          image_url: imageUrl,
+          active: active,
+          sort_order:
+            sortOrderValue !== ""
+              ? parseInt(sortOrderValue, 10)
+              : 0,
+          updated_at: new Date().toISOString()
+        };
+
+
+        const { error } = await supabaseClient
+          .from("products")
+          .insert(productData);
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showFormStatus(
+          "Prodotto salvato correttamente.",
+          "success"
+        );
+
+        await loadProducts();
+
+        productForm.reset();
+        document.getElementById("productActive").checked = true;
+        document.getElementById("productOrder").value = 0;
+
+      } catch (error) {
+
+        console.error(error);
+
+        showFormStatus(
+          error.message ||
+          "Si è verificato un errore durante il salvataggio.",
+          "error"
+        );
+
+      } finally {
+
+        saveProductButton.disabled = false;
+        saveProductButton.textContent = "SALVA PRODOTTO";
+      }
+    });
+
+
     loginForm.addEventListener("submit", async function(event) {
+
       event.preventDefault();
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
 
       loginButton.disabled = true;
       loginButton.textContent = "ACCESSO...";
@@ -394,6 +814,7 @@
         });
 
       if (error) {
+
         showMessage(
           "Email o password non corretti.",
           "error"
@@ -410,15 +831,32 @@
       showDashboard();
     });
 
+
     logoutButton.addEventListener("click", async function() {
       await supabaseClient.auth.signOut();
+
       loginForm.reset();
+      closeProductForm();
       showLogin();
     });
 
+
+    addProductButton.addEventListener(
+      "click",
+      openProductForm
+    );
+
+
+    cancelProductButton.addEventListener(
+      "click",
+      closeProductForm
+    );
+
+
     async function checkSession() {
 
-      const { data } = await supabaseClient.auth.getSession();
+      const { data } =
+        await supabaseClient.auth.getSession();
 
       if (data.session) {
         showDashboard();
@@ -427,11 +865,6 @@
       }
     }
 
-    document
-      .getElementById("addProductButton")
-      .addEventListener("click", function() {
-        alert("Nel prossimo passaggio creeremo la scheda per aggiungere un prodotto.");
-      });
 
     checkSession();
   </script>
